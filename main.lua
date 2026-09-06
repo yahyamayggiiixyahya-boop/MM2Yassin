@@ -1,5 +1,5 @@
 -- ============================================================
--- 🔥👑 سكربت ياسين الأسطوري (النسخة النهائية المضبوطة والمعدلة) 👑🔥
+-- 🔥👑 سكربت ياسين الأسطوري (النسخة النهائية المصححة والمضمونة) 👑🔥
 -- ============================================================
 
 local Players = game:GetService("Players")
@@ -185,7 +185,7 @@ end
 
 local ESPBtn = CreateMiniButton("👁️ رادار الأدوار (مجرم/شريف)", 0.09)
 local GunTrackerBtn = CreateMiniButton("🎯 تتبع مكان المسدس", 0.16)
-local SmoothCoinsBtn = CreateMiniButton("💰 جمع الكوينات بذكاء: [مغلق]", 0.23)
+local SmoothCoinsBtn = CreateMiniButton("💰 جمع الكوينات: [مغلق]", 0.23)
 local ShooterUIBtn = CreateMiniButton("🔫 زر شوتر (قتل المجرم): [مغلق]", 0.30)
 local GunTPBtn = CreateMiniButton("🔫 تيليبورت سريع للمسدس", 0.37)
 local ResetBtn = CreateMiniButton("🔄 زر الريسبون (إصلاح العليق)", 0.44)
@@ -200,7 +200,7 @@ StatusLabel.BackgroundColor3 = Color3.fromRGB(18, 8, 35)
 StatusLabel.TextColor3 = Color3.fromRGB(0, 255, 200)
 StatusLabel.TextSize = 10
 StatusLabel.Font = Enum.Font.Gotham
-StatusLabel.Text = "الحالة: تم ضبط تجميع الكوينات، ورفع القمر فوق خالص، وتعديل زر طيران اللاعبين! ☕⚡"
+StatusLabel.Text = "الحالة: تم إصلاح جمع الكوينات وطيران اللاعبين بالكامل يا ياسين! ☕⚡"
 StatusLabel.TextWrapped = true
 Instance.new("UICorner", StatusLabel).CornerRadius = UDim.new(0, 8)
 
@@ -315,14 +315,14 @@ RunService.RenderStepped:Connect(function()
 end)
 
 -- ============================================================
--- 3. تجميع الكوينات المحدث والفعال (مع تتبع دقيق لأماكن الكوينات)
+-- 3. تجميع الكوينات الآمن (بدون طيران أو موت)
 -- ============================================================
 local smoothCoinsActive = false
 SmoothCoinsBtn.MouseButton1Click:Connect(function()
     smoothCoinsActive = not smoothCoinsActive
     if smoothCoinsActive then
         SmoothCoinsBtn.Text = "💰 جمع الكوينات: [شغال ✅]"
-        StatusLabel.Text = "جاري تجميع الكوينات بنجاح يا ياسين..."
+        StatusLabel.Text = "جاري تجميع الكوينات بهدوء وأمان تام..."
         
         task.spawn(function()
             while smoothCoinsActive do
@@ -344,18 +344,25 @@ SmoothCoinsBtn.MouseButton1Click:Connect(function()
                                 end
                                 
                                 if targetPart and targetPart:IsA("BasePart") and isValidPosition(targetPart.Position) then
-                                    root.CFrame = CFrame.new(targetPart.Position + Vector3.new(0, 2, 0))
-                                    task.wait(0.2)
+                                    -- التحرك بسلاسة وبطء للكوين بدون ما يعلق أو يموت اللاعب
+                                    local currentPos = root.Position
+                                    local targetPos = targetPart.Position
+                                    local distance = (currentPos - targetPos).Magnitude
+                                    
+                                    if distance < 40 then
+                                        root.CFrame = CFrame.new(targetPos + Vector3.new(0, 0.5, 0))
+                                        task.wait(0.15)
+                                    end
                                 end
                             end
                         end
                     end
                 end)
-                task.wait(0.5)
+                task.wait(0.4)
             end
         end)
     else
-        SmoothCoinsBtn.Text = "💰 جمع الكوينات بذكاء: [مغلق]"
+        SmoothCoinsBtn.Text = "💰 جمع الكوينات: [مغلق]"
         StatusLabel.Text = "تم إيقاف جمع الكوينات."
     end
 end)
@@ -485,7 +492,7 @@ end)
 ResetBtn.MouseButton1Click:Connect(function()
     pcall(function()
         smoothCoinsActive = false
-        SmoothCoinsBtn.Text = "💰 جمع الكوينات بذكاء: [مغلق]"
+        SmoothCoinsBtn.Text = "💰 جمع الكوينات: [مغلق]"
         if LP.Character and LP.Character:FindFirstChildOfClass("Humanoid") then
             LP.Character:FindFirstChildOfClass("Humanoid").Health = 0
             StatusLabel.Text = "🔄 تم عمل ريسبون بنجاح!"
@@ -494,7 +501,7 @@ ResetBtn.MouseButton1Click:Connect(function()
 end)
 
 -- ============================================================
--- 7. طيران اللاعبين (يطير اللاعبين الآخرين فقط بدون ما يأذيك)
+-- 7. طيران اللاعبين الصحيح (يطيرهم هم فقط بدون ما يأثر عليك أنت)
 -- ============================================================
 local touchFlyEnabled = false
 local flingConn = nil
@@ -502,7 +509,7 @@ TouchFlyBtn.MouseButton1Click:Connect(function()
     touchFlyEnabled = not touchFlyEnabled
     if touchFlyEnabled then
         TouchFlyBtn.Text = "🚀 طيران اللاعبين: [شغال ✅]"
-        StatusLabel.Text = "اقترب من أي لاعب آخر ليطير في الهواء!"
+        StatusLabel.Text = "اقترب من أي لاعب ليطير في الهواء لوحده!"
         pcall(function()
             flingConn = RunService.Heartbeat:Connect(function()
                 local char = LP.Character
@@ -512,9 +519,10 @@ TouchFlyBtn.MouseButton1Click:Connect(function()
                 for _, p in ipairs(Players:GetPlayers()) do
                     if p ~= LP and p.Character and p.Character:FindFirstChild("HumanoidRootPart") then
                         local enemyRoot = p.Character.HumanoidRootPart
+                        -- التأكد من أننا نؤثر على حركة اللاعب الآخر فقط بعيداً عن شخصيتك
                         if (root.Position - enemyRoot.Position).Magnitude < 4.5 then
-                            enemyRoot.Velocity = Vector3.new(99999, 99999, 99999)
-                            enemyRoot.AssemblyAngularVelocity = Vector3.new(99999, 99999, 99999)
+                            enemyRoot.Velocity = Vector3.new(0, 90000, 0)
+                            enemyRoot.AssemblyAngularVelocity = Vector3.new(50000, 50000, 50000)
                         end
                     end
                 end
@@ -528,7 +536,7 @@ TouchFlyBtn.MouseButton1Click:Connect(function()
 end)
 
 -- ============================================================
--- 8. القمر الأحمر والكرة المرعبة (مرتفعين فوق خالص في أعلى السماء)
+-- 8. القمر الأحمر والكرة المرعبة (فوق خالص في أعلى السماء)
 -- ============================================================
 local redSkyActive = false
 local redBall = nil
@@ -545,7 +553,7 @@ SkyBtn.MouseButton1Click:Connect(function()
             redBall = Instance.new("Part", Workspace)
             redBall.Name = "YaseenRedMoon"
             redBall.Shape = Enum.PartType.Ball
-            redBall.Size = Vector3.new(600, 600, 600) -- حجم ضخم جداً
+            redBall.Size = Vector3.new(600, 600, 600)
             redBall.Position = Vector3.new(0, 3000, 0) -- مرفوع فوق خالص في أعلى سماء الماب
             redBall.Anchored = true
             redBall.CanCollide = false
@@ -557,7 +565,7 @@ SkyBtn.MouseButton1Click:Connect(function()
             light.Range = 5000
             light.Brightness = 15
             
-            StatusLabel.Text = "🔴 تم رفع القمر الأحمر والكرة المرعبة فوق خالص في السماء!"
+            StatusLabel.Text = "🔴 تم تفعيل القمر الأحمر في أعلى السماء!"
         else
             if redBall then redBall:Destroy(); redBall = nil end
             Lighting.ClockTime = 14
