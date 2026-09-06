@@ -1,5 +1,5 @@
 -- ============================================================
--- 🔥👑 سكربت ياسين الأسطوري (النسخة النهائية باسم ياسين) 👑🔥
+-- 🔥👑 سكربت ياسين الأسطوري (النسخة النهائية الفخمة - اختراق جدران + ألوان سماوي وبنفسجي لامع) 👑🔥
 -- ============================================================
 
 local Players = game:GetService("Players")
@@ -12,16 +12,6 @@ local UserInputService = game:GetService("UserInputService")
 local LP = Players.LocalPlayer
 
 -- ============================================================
--- 🛡️ دالة التحقق من الإحداثيات لتجنب كود 267 والكراشات
--- ============================================================
-local function isValidPosition(pos)
-    if typeof(pos) ~= "Vector3" then return false end
-    if pos.X ~= pos.X or pos.Y ~= pos.Y or pos.Z ~= pos.Z then return false end
-    if math.abs(pos.X) == math.huge or math.abs(pos.Y) == math.huge or math.abs(pos.Z) == math.huge then return false end
-    return true
-end
-
--- ============================================================
 -- 🛡️ حماياتك الخاصة (Anti_Kick V1 & V2)
 -- ============================================================
 task.spawn(function()
@@ -30,20 +20,6 @@ task.spawn(function()
     end)
     pcall(function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/yahyamayggiiixyahya-boop/Anti_KickV1/refs/heads/main/main.lua"))()
-    end)
-    
-    pcall(function()
-        local mt = getrawmetatable(game)
-        setreadonly(mt, false)
-        local oldNamecall = mt.__namecall
-        mt.__namecall = newcclosure(function(self, ...)
-            val = getnamecallmethod()
-            if (val == "Kick" or val == "kick" or val:lower():find("ban")) and self == LP then
-                return nil
-            end
-            return oldNamecall(self, ...)
-        end)
-        setreadonly(mt, true)
     end)
 end)
 
@@ -64,161 +40,161 @@ IntroGui.IgnoreGuiInset = true
 
 local IntroBg = Instance.new("Frame", IntroGui)
 IntroBg.Size = UDim2.new(1, 0, 1, 0)
-IntroBg.BackgroundColor3 = Color3.fromRGB(6, 2, 12)
+IntroBg.BackgroundColor3 = Color3.fromRGB(10, 4, 20)
 IntroBg.BorderSizePixel = 0
 
 local IntroCard = Instance.new("Frame", IntroBg)
-IntroCard.Size = UDim2.new(0, 340, 0, 150)
-IntroCard.Position = UDim2.new(0.5, -170, 0.45, -75)
-IntroCard.BackgroundColor3 = Color3.fromRGB(15, 6, 28)
+IntroCard.Size = UDim2.new(0, 320, 0, 140)
+IntroCard.Position = UDim2.new(0.5, -160, 0.45, -70)
+IntroCard.BackgroundColor3 = Color3.fromRGB(20, 10, 35)
 IntroCard.BackgroundTransparency = 1
-Instance.new("UICorner", IntroCard).CornerRadius = UDim.new(0, 16)
+Instance.new("UICorner", IntroCard).CornerRadius = UDim.new(0, 14)
 
 local CardStroke = Instance.new("UIStroke", IntroCard)
-CardStroke.Thickness = 3.5
-CardStroke.Color = Color3.fromRGB(147, 51, 234)
+CardStroke.Thickness = 3
+CardStroke.Color = Color3.fromRGB(0, 225, 255) -- سماوي لامع
 CardStroke.Transparency = 1
 
 local IntroTitle = Instance.new("TextLabel", IntroCard)
-IntroTitle.Size = UDim2.new(1, 0, 0, 60)
-IntroTitle.Position = UDim2.new(0, 0, 0.1, 0)
+IntroTitle.Size = UDim2.new(1, 0, 0, 50)
+IntroTitle.Position = UDim2.new(0, 0, 0.15, 0)
 IntroTitle.BackgroundTransparency = 1
-IntroTitle.TextColor3 = Color3.fromRGB(255, 215, 0)
-IntroTitle.TextSize = 28
+IntroTitle.TextColor3 = Color3.fromRGB(0, 255, 255)
+IntroTitle.TextSize = 26
 IntroTitle.Font = Enum.Font.FredokaOne
 IntroTitle.Text = "⚡ ياسين ⚡"
 IntroTitle.TextTransparency = 1
 
 local IntroSub = Instance.new("TextLabel", IntroCard)
-IntroSub.Size = UDim2.new(1, 0, 0, 40)
+IntroSub.Size = UDim2.new(1, 0, 0, 35)
 IntroSub.Position = UDim2.new(0, 0, 0.55, 0)
 IntroSub.BackgroundTransparency = 1
-IntroSub.TextColor3 = Color3.fromRGB(210, 170, 255)
-IntroSub.TextSize = 15
+IntroSub.TextColor3 = Color3.fromRGB(200, 150, 255)
+IntroSub.TextSize = 14
 IntroSub.Font = Enum.Font.GothamBold
-IntroSub.Text = "أقوى سكربت ملكي في اللعبة..."
+IntroSub.Text = "جارِ تحميل السكربت الملكي..."
 IntroSub.TextTransparency = 1
 
--- تعريف القائمة الرئيسية مسبقاً ولكن مخفية لحين انتهاء الأنترو
+-- القائمة الرئيسية (سماوي بنفسجي لامع)
 local ScreenGui = Instance.new("ScreenGui", CoreGui)
 ScreenGui.Name = "YaseenShooterHub"
 ScreenGui.ResetOnSpawn = false
 
 local ToggleBtn = Instance.new("TextButton", ScreenGui)
-ToggleBtn.Size = UDim2.new(0, 50, 0, 50)
+ToggleBtn.Size = UDim2.new(0, 45, 0, 45)
 ToggleBtn.Position = UDim2.new(0.01, 0, 0.12, 0)
-ToggleBtn.BackgroundColor3 = Color3.fromRGB(20, 10, 35)
-ToggleBtn.TextColor3 = Color3.fromRGB(255, 215, 0)
-ToggleBtn.TextSize = 20
+ToggleBtn.BackgroundColor3 = Color3.fromRGB(15, 8, 30)
+ToggleBtn.TextColor3 = Color3.fromRGB(0, 255, 255)
+ToggleBtn.TextSize = 18
 ToggleBtn.Font = Enum.Font.FredokaOne
 ToggleBtn.Text = "👑"
 ToggleBtn.Visible = false
 Instance.new("UICorner", ToggleBtn).CornerRadius = UDim.new(1, 0)
 local ToggleStroke = Instance.new("UIStroke", ToggleBtn)
 ToggleStroke.Thickness = 2.5
-ToggleStroke.Color = Color3.fromRGB(147, 51, 234)
+ToggleStroke.Color = Color3.fromRGB(147, 51, 234) -- بنفسجي
 
 local MainFrame = Instance.new("Frame", ScreenGui)
-MainFrame.Size = UDim2.new(0, 260, 0, 440)
+MainFrame.Size = UDim2.new(0, 240, 0, 410)
 MainFrame.Position = UDim2.new(0.07, 0, 0.12, 0)
-MainFrame.BackgroundColor3 = Color3.fromRGB(12, 6, 22)
+MainFrame.BackgroundColor3 = Color3.fromRGB(12, 5, 25)
 MainFrame.BackgroundTransparency = 0.05
 MainFrame.BorderSizePixel = 0
 MainFrame.Active = true
 MainFrame.Draggable = true
 MainFrame.Visible = false
-Instance.new("UICorner", MainFrame).CornerRadius = UDim.new(0, 14)
+Instance.new("UICorner", MainFrame).CornerRadius = UDim.new(0, 12)
 
 local MainStroke = Instance.new("UIStroke", MainFrame)
-MainStroke.Thickness = 3.5
-MainStroke.Color = Color3.fromRGB(147, 51, 234) -- بنفسجي ثانوي فخم
+MainStroke.Thickness = 3
+-- تدرج لوني أو لون سماوي بنفسجي لامع
+MainStroke.Color = Color3.fromRGB(0, 240, 255)
 
 local Title = Instance.new("TextLabel", MainFrame)
-Title.Size = UDim2.new(1, 0, 0, 40)
+Title.Size = UDim2.new(1, 0, 0, 35)
 Title.Position = UDim2.new(0, 0, 0, 0)
 Title.BackgroundTransparency = 1
-Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.TextColor3 = Color3.fromRGB(0, 255, 255)
 Title.TextSize = 13
 Title.Font = Enum.Font.GothamBold
-Title.Text = "⚡ YASEEN PRO HUB ⚡"
+Title.Text = "⚡ YASEEN HUB ⚡"
 
 ToggleBtn.MouseButton1Click:Connect(function()
     MainFrame.Visible = not MainFrame.Visible
 end)
 
--- تشغيل تتابع الأنترو السينمائي المخصص باسم ياسين
+-- تشغيل الأنترو
 task.spawn(function()
-    TweenService:Create(IntroCard, TweenInfo.new(1.2), {BackgroundTransparency = 0.1}):Play()
-    TweenService:Create(CardStroke, TweenInfo.new(1.2), {Transparency = 0}):Play()
-    TweenService:Create(IntroTitle, TweenInfo.new(1.2), {TextTransparency = 0}):Play()
-    TweenService:Create(IntroSub, TweenInfo.new(1.2), {TextTransparency = 0}):Play()
+    TweenService:Create(IntroCard, TweenInfo.new(1), {BackgroundTransparency = 0.1}):Play()
+    TweenService:Create(CardStroke, TweenInfo.new(1), {Transparency = 0}):Play()
+    TweenService:Create(IntroTitle, TweenInfo.new(1), {TextTransparency = 0}):Play()
+    TweenService:Create(IntroSub, TweenInfo.new(1), {TextTransparency = 0}):Play()
     
-    task.wait(3)
+    task.wait(2.5)
     
-    TweenService:Create(IntroCard, TweenInfo.new(1), {BackgroundTransparency = 1}):Play()
-    TweenService:Create(CardStroke, TweenInfo.new(1), {Transparency = 1}):Play()
-    TweenService:Create(IntroTitle, TweenInfo.new(1), {TextTransparency = 1}):Play()
-    TweenService:Create(IntroSub, TweenInfo.new(1), {TextTransparency = 1}):Play()
-    TweenService:Create(IntroBg, TweenInfo.new(1), {BackgroundTransparency = 1}):Play()
+    TweenService:Create(IntroCard, TweenInfo.new(0.8), {BackgroundTransparency = 1}):Play()
+    TweenService:Create(CardStroke, TweenInfo.new(0.8), {Transparency = 1}):Play()
+    TweenService:Create(IntroTitle, TweenInfo.new(0.8), {TextTransparency = 1}):Play()
+    TweenService:Create(IntroSub, TweenInfo.new(0.8), {TextTransparency = 1}):Play()
+    TweenService:Create(IntroBg, TweenInfo.new(0.8), {BackgroundTransparency = 1}):Play()
     
-    task.wait(1)
+    task.wait(0.8)
     IntroGui:Destroy()
     
-    -- إظهار القائمة بعد انتهاء الأنترو
     ToggleBtn.Visible = true
     MainFrame.Visible = true
 end)
 
 local function CreateMiniButton(name, posY)
     local btn = Instance.new("TextButton", MainFrame)
-    btn.Size = UDim2.new(0.9, 0, 0, 32)
+    btn.Size = UDim2.new(0.9, 0, 0, 30)
     btn.Position = UDim2.new(0.05, 0, posY, 0)
-    btn.BackgroundColor3 = Color3.fromRGB(30, 15, 55)
-    btn.TextColor3 = Color3.fromRGB(240, 220, 255)
-    btn.TextSize = 11
+    btn.BackgroundColor3 = Color3.fromRGB(28, 12, 52) -- بنفسجي غامق لامع
+    btn.TextColor3 = Color3.fromRGB(0, 255, 255) -- نص سماوي
+    btn.TextSize = 10
     btn.Font = Enum.Font.GothamBold
     btn.Text = name
-    Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 8)
+    Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 6)
     
     local stroke = Instance.new("UIStroke", btn)
-    stroke.Thickness = 1.2
-    stroke.Color = Color3.fromRGB(147, 51, 234)
+    stroke.Thickness = 1.5
+    stroke.Color = Color3.fromRGB(0, 220, 255) -- إطار سماوي لامع
     return btn
 end
 
 -- الأزرار بالترتيب
-local ESPBtn = CreateMiniButton("👁️ رادار الأدوار (مجرم/شريف)", 0.09)
-local DoubleJumpBtn = CreateMiniButton("🦘 دبل جمب (نطتين): [مغلق]", 0.16)
-local SmoothCoinsBtn = CreateMiniButton("💰 جمع الفلوس الآمن: [مغلق]", 0.23)
-local FlyMurderBtn = CreateMiniButton("🔪 طير المجرم (Murderer)", 0.30)
-local FlySheriffBtn = CreateMiniButton("🔫 طير الشريف (Sheriff)", 0.37)
+local ESPBtn = CreateMiniButton("👁️ رادار الأدوار والمسدس", 0.09)
+local DoubleJumpBtn = CreateMiniButton("🦘 انفينتي جمب (نطاتي): [مغلق]", 0.16)
+local SmoothCoinsBtn = CreateMiniButton("💰 جمع العملات (جري + اختراق حوائط): [مغلق]", 0.23)
+local FlyMurderBtn = CreateMiniButton("🔪 طير المجرم باستمرار", 0.30)
+local FlySheriffBtn = CreateMiniButton("🔫 طير الشريف باستمرار", 0.37)
 local ShooterUIBtn = CreateMiniButton("🔫 زر شوتر (قتل المجرم): [مغلق]", 0.44)
-local GunTPBtn = CreateMiniButton("🔫 تيليبورت سريع للمسدس", 0.51)
-local ResetBtn = CreateMiniButton("🔄 زر الريسبون (إصلاح العليق)", 0.58)
-local SkyBtn = CreateMiniButton("🔴 القمر الأحمر العالي بالسماء: [مغلق]", 0.65)
+local GunTPBtn = CreateMiniButton("🔫 أخذ المسدس فوراً", 0.51)
+local ResetBtn = CreateMiniButton("🔄 ريسبون (إصلاح العليق)", 0.58)
+local SkyBtn = CreateMiniButton("🔴 القمر الأحمر + النجوم اللامعة: [مغلق]", 0.65)
 
 local StatusLabel = Instance.new("TextLabel", MainFrame)
-StatusLabel.Size = UDim2.new(0.9, 0, 0, 75)
-StatusLabel.Position = UDim2.new(0.05, 0, 0.73, 0)
-StatusLabel.BackgroundColor3 = Color3.fromRGB(18, 8, 35)
+StatusLabel.Size = UDim2.new(0.9, 0, 0, 65)
+StatusLabel.Position = UDim2.new(0.05, 0, 0.74, 0)
+StatusLabel.BackgroundColor3 = Color3.fromRGB(15, 6, 30)
 StatusLabel.TextColor3 = Color3.fromRGB(0, 255, 200)
-StatusLabel.TextSize = 10
+StatusLabel.TextSize = 9
 StatusLabel.Font = Enum.Font.Gotham
-StatusLabel.Text = "الحالة: أهلاً بك يا ياسين، الأنترو والمنيو جاهزين بالبنفسجي الثانوي الفخم! 👑⚡"
+StatusLabel.Text = "الحالة: جاهز يا ياسين! اخترق الحوائط وجمع العملات بسرعة الصاروخ. 👑⚡"
 StatusLabel.TextWrapped = true
-Instance.new("UICorner", StatusLabel).CornerRadius = UDim.new(0, 8)
+Instance.new("UICorner", StatusLabel).CornerRadius = UDim.new(0, 6)
 
 -- ============================================================
--- 1. رادار الأدوار (ESP)
+-- 1. رادار الأدوار + مكان المسدس إذا مات الشريف
 -- ============================================================
 local espEnabled = false
 ESPBtn.MouseButton1Click:Connect(function()
     espEnabled = not espEnabled
     if espEnabled then
         ESPBtn.Text = "👁️ رادار الأدوار: [شغال ✅]"
-        StatusLabel.Text = "تم تفعيل رادار الأدوار يا ياسين."
+        StatusLabel.Text = "تم تفعيل رادار الأدوار ومراقبة المسدس."
     else
-        ESPBtn.Text = "👁️ رادار الأدوار (مجرم/شريف)"
+        ESPBtn.Text = "👁️ رادار الأدوار والمسدس"
         StatusLabel.Text = "تم إيقاف الرادار."
     end
 end)
@@ -252,7 +228,7 @@ RunService.RenderStepped:Connect(function()
                     txt.Name = "RoleTxt"
                     txt.Size = UDim2.new(1, 0, 1, 0)
                     txt.BackgroundTransparency = 1
-                    txt.TextSize = 12
+                    txt.TextSize = 11
                     txt.Font = Enum.Font.GothamBold
                 end
                 
@@ -263,61 +239,93 @@ RunService.RenderStepped:Connect(function()
                 end
             end
         end
+        
+        for _, obj in ipairs(Workspace:GetDescendants()) do
+            if obj.Name == "GunDrop" or obj.Name == "DroppedGun" or (obj:IsA("BasePart") and obj.Name:lower().find("gun")) then
+                if not obj:FindFirstChild("YaseenGunESP") then
+                    local bb = Instance.new("BillboardGui", obj)
+                    bb.Name = "YaseenGunESP"
+                    bb.Size = UDim2.new(0, 120, 0, 40)
+                    bb.StudsOffset = Vector3.new(0, 2, 0)
+                    bb.AlwaysOnTop = true
+                    
+                    local txt = Instance.new("TextLabel", bb)
+                    txt.Size = UDim2.new(1, 0, 1, 0)
+                    txt.BackgroundTransparency = 1
+                    txt.TextColor3 = Color3.fromRGB(255, 255, 0)
+                    txt.TextSize = 12
+                    txt.Font = Enum.Font.FredokaOne
+                    txt.Text = "🔫 [مكان المسدس]"
+                end
+            end
+        end
     end)
 end)
 
 -- ============================================================
--- 2. دبل جمب (Double Jump)
+-- 2. انفينتي جمب (Infinity Jump)
 -- ============================================================
-local doubleJumpActive = false
-local djConn
+local infinityJumpActive = false
+local ijConn
 
 DoubleJumpBtn.MouseButton1Click:Connect(function()
-    doubleJumpActive = not doubleJumpActive
-    if doubleJumpActive then
-        DoubleJumpBtn.Text = "🦘 دبل جمب: [شغال ✅]"
-        StatusLabel.Text = "تم تفعيل الدبل جمب بنجاح!"
+    infinityJumpActive = not infinityJumpActive
+    if infinityJumpActive then
+        DoubleJumpBtn.Text = "🦘 انفينتي جمب: [شغال ✅]"
+        StatusLabel.Text = "تم تفعيل القفز اللانهائي!"
         
-        local canDoubleJump = false
-        djConn = UserInputService.JumpRequest:Connect(function()
+        ijConn = UserInputService.JumpRequest:Connect(function()
             pcall(function()
                 local char = LP.Character
                 local humanoid = char and char:FindFirstChildOfClass("Humanoid")
                 if humanoid then
-                    if humanoid:GetState() == Enum.HumanoidStateType.Freefall then
-                        if canDoubleJump then
-                            humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-                            canDoubleJump = false
-                        end
-                    elseif humanoid:GetState() == Enum.HumanoidStateType.Running then
-                        canDoubleJump = true
-                    end
+                    humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
                 end
             end)
         end)
     else
-        DoubleJumpBtn.Text = "🦘 دبل جمب (نطتين): [مغلق]"
-        StatusLabel.Text = "تم إيقاف الدبل جمب."
-        if djConn then djConn:Disconnect() end
+        DoubleJumpBtn.Text = "🦘 انفينتي جمب (نطاتي): [مغلق]"
+        StatusLabel.Text = "تم إيقاف القفز اللانهائي."
+        if ijConn then ijConn:Disconnect() end
     end
 end)
 
 -- ============================================================
--- 3. تجميع العملات (Coins) الآمن
+-- 3. تجميع العملات (جري سريع + اختراق الجدران بحركة مستقيمة)
 -- ============================================================
 local smoothCoinsActive = false
+local noclipConn
+
 SmoothCoinsBtn.MouseButton1Click:Connect(function()
     smoothCoinsActive = not smoothCoinsActive
     if smoothCoinsActive then
-        SmoothCoinsBtn.Text = "💰 جمع الفلوس: [شغال ✅]"
-        StatusLabel.Text = "جاري تجميع العملات بهدوء وأمان تام..."
+        SmoothCoinsBtn.Text = "💰 جمع العملات (مخترق الحوائط): [شغال ✅]"
+        StatusLabel.Text = "جاري الجري واختراق الحوائط لجمع العملات بمسار مستقيم..."
+        
+        -- تفعيل اختراق الحوائط (No-Clip) أثناء العمل
+        noclipConn = RunService.Stepped:Connect(function()
+            pcall(function()
+                local char = LP.Character
+                if char then
+                    for _, part in ipairs(char:GetDescendants()) do
+                        if part:IsA("BasePart") then
+                            part.CanCollide = false
+                        end
+                    end
+                end
+            end)
+        end)
         
         task.spawn(function()
             while smoothCoinsActive do
                 pcall(function()
                     local char = LP.Character
                     local root = char and char:FindFirstChild("HumanoidRootPart")
-                    if not root or not isValidPosition(root.Position) then return end
+                    local humanoid = char and char:FindFirstChildOfClass("Humanoid")
+                    if not root or not humanoid then return end
+                    
+                    local oldSpeed = humanoid.WalkSpeed
+                    humanoid.WalkSpeed = 50 -- سرعة صاروخية
                     
                     for _, obj in ipairs(Workspace:GetDescendants()) do
                         if not smoothCoinsActive then break end
@@ -331,31 +339,39 @@ SmoothCoinsBtn.MouseButton1Click:Connect(function()
                                     targetPart = coin:FindFirstChildWhichIsA("BasePart")
                                 end
                                 
-                                if targetPart and targetPart:IsA("BasePart") and isValidPosition(targetPart.Position) then
-                                    local currentPos = root.Position
-                                    local targetPos = targetPart.Position
-                                    local distance = (currentPos - targetPos).Magnitude
-                                    
-                                    if distance < 40 then
-                                        root.CFrame = CFrame.new(targetPos + Vector3.new(0, 0.3, 0))
-                                        task.wait(0.15)
+                                if targetPart and targetPart:IsA("BasePart") then
+                                    local dist = (root.Position - targetPart.Position).Magnitude
+                                    if dist < 90 then
+                                        humanoid:MoveTo(targetPart.Position)
+                                        task.wait(0.1)
                                     end
                                 end
                             end
                         end
                     end
+                    humanoid.WalkSpeed = oldSpeed
                 end)
-                task.wait(0.4)
+                task.wait(0.2)
             end
+            if noclipConn then noclipConn:Disconnect() end
         end)
     else
-        SmoothCoinsBtn.Text = "💰 جمع الفلوس الآمن: [مغلق]"
-        StatusLabel.Text = "تم إيقاف جمع الفلوس."
+        SmoothCoinsBtn.Text = "💰 جمع العملات (جري + اختراق حوائط): [مغلق]"
+        StatusLabel.Text = "تم إيقاف جمع العملات."
+        if noclipConn then noclipConn:Disconnect() end
+        pcall(function()
+            local char = LP.Character
+            if char then
+                for _, part in ipairs(char:GetDescendants()) do
+                    if part:IsA("BasePart") then part.CanCollide = true end
+                end
+            end
+        end)
     end
 end)
 
 -- ============================================================
--- 4. زر طير المجرم (Murderer Fling)
+-- 4. طير المجرم باستمرار (Continuous Fling)
 -- ============================================================
 FlyMurderBtn.MouseButton1Click:Connect(function()
     pcall(function()
@@ -371,19 +387,23 @@ FlyMurderBtn.MouseButton1Click:Connect(function()
         
         if targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
             local enemyRoot = targetPlayer.Character.HumanoidRootPart
-            if isValidPosition(enemyRoot.Position) then
-                enemyRoot.Velocity = Vector3.new(0, 8000, 0)
-                enemyRoot.RotVelocity = Vector3.new(5000, 5000, 5000)
-                StatusLabel.Text = "🔪 تم طير المجرم في الهوا يا ياسين!"
-            end
+            StatusLabel.Text = "🔪 جاري طير المجرم وهبده باستمرار!"
+            task.spawn(function()
+                for i = 1, 40 do
+                    if not enemyRoot or not enemyRoot.Parent then break end
+                    enemyRoot.Velocity = Vector3.new(0, 9000, 0)
+                    enemyRoot.RotVelocity = Vector3.new(8000, 8000, 8000)
+                    task.wait(0.05)
+                end
+            end)
         else
-            StatusLabel.Text = "⚠️ لم يتم العثور على المجرم بعد."
+            StatusLabel.Text = "⚠️ لم يتم العثور على المجرم."
         end
     end)
 end)
 
 -- ============================================================
--- 5. زر طير الشريف (Sheriff Fling)
+-- 5. طير الشريف باستمرار (Continuous Fling)
 -- ============================================================
 FlySheriffBtn.MouseButton1Click:Connect(function()
     pcall(function()
@@ -399,19 +419,23 @@ FlySheriffBtn.MouseButton1Click:Connect(function()
         
         if targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
             local enemyRoot = targetPlayer.Character.HumanoidRootPart
-            if isValidPosition(enemyRoot.Position) then
-                enemyRoot.Velocity = Vector3.new(0, 8000, 0)
-                enemyRoot.RotVelocity = Vector3.new(5000, 5000, 5000)
-                StatusLabel.Text = "🔫 تم طير الشريف في الهوا!"
-            end
+            StatusLabel.Text = "🔫 جاري طير الشريف وهبده باستمرار!"
+            task.spawn(function()
+                for i = 1, 40 do
+                    if not enemyRoot or not enemyRoot.Parent then break end
+                    enemyRoot.Velocity = Vector3.new(0, 9000, 0)
+                    enemyRoot.RotVelocity = Vector3.new(8000, 8000, 8000)
+                    task.wait(0.05)
+                end
+            end)
         else
-            StatusLabel.Text = "⚠️ لم يتم العثور على الشريف بعد."
+            StatusLabel.Text = "⚠️ لم يتم العثور على الشريف."
         end
     end)
 end)
 
 -- ============================================================
--- 6. إيمبوت زر شوتر (قتل المجرم بدقة)
+-- 6. زر شوتر (قتل المجرم بدقة)
 -- ============================================================
 local shooterEnabled = false
 local shooterButton = nil
@@ -419,17 +443,17 @@ local shooterButton = nil
 ShooterUIBtn.MouseButton1Click:Connect(function()
     shooterEnabled = not shooterEnabled
     if shooterEnabled then
-        ShooterUIBtn.Text = "🔫 زر شوتر (قتل المجرم): [شغال ✅]"
+        ShooterUIBtn.Text = "🔫 زر شوتر: [شغال ✅]"
         StatusLabel.Text = "تم إظهار زر شوتر على الشاشة!"
         
         if not ScreenGui:FindFirstChild("YaseenShooterBtn") then
             shooterButton = Instance.new("TextButton", ScreenGui)
             shooterButton.Name = "YaseenShooterBtn"
-            shooterButton.Size = UDim2.new(0, 90, 0, 90)
+            shooterButton.Size = UDim2.new(0, 85, 0, 85)
             shooterButton.Position = UDim2.new(0.8, 0, 0.7, 0)
             shooterButton.BackgroundColor3 = Color3.fromRGB(220, 0, 0)
             shooterButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-            shooterButton.TextSize = 15
+            shooterButton.TextSize = 14
             shooterButton.Font = Enum.Font.FredokaOne
             shooterButton.Text = "🔥 شوتر\n(اقتل المجرم)"
             shooterButton.Active = true
@@ -437,8 +461,8 @@ ShooterUIBtn.MouseButton1Click:Connect(function()
             Instance.new("UICorner", shooterButton).CornerRadius = UDim.new(1, 0)
             
             local btnStroke = Instance.new("UIStroke", shooterButton)
-            btnStroke.Thickness = 3
-            btnStroke.Color = Color3.fromRGB(255, 255, 0)
+            btnStroke.Thickness = 2.5
+            btnStroke.Color = Color3.fromRGB(0, 255, 255)
             
             shooterButton.MouseButton1Click:Connect(function()
                 pcall(function()
@@ -454,17 +478,14 @@ ShooterUIBtn.MouseButton1Click:Connect(function()
                     
                     if targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
                         local enemyRoot = targetPlayer.Character.HumanoidRootPart
-                        if not isValidPosition(enemyRoot.Position) then return end
-                        
                         local myChar = LP.Character
                         local myRoot = myChar and myChar:FindFirstChild("HumanoidRootPart")
-                        if not myRoot or not isValidPosition(myRoot.Position) then return end
+                        if not myRoot then return end
                         
                         local gun = myChar:FindFirstChild("Gun") or LP.Backpack:FindFirstChild("Gun") or myChar:FindFirstChild("Revolver") or LP.Backpack:FindFirstChild("Revolver")
                         
                         if gun then
                             if gun.Parent == LP.Backpack then gun.Parent = myChar end
-                            
                             local oldPos = myRoot.CFrame
                             myRoot.CFrame = enemyRoot.CFrame + Vector3.new(0, 3, 0)
                             task.wait(0.05)
@@ -472,7 +493,7 @@ ShooterUIBtn.MouseButton1Click:Connect(function()
                             if gun:IsA("Tool") then
                                 gun:Activate()
                                 for _, remote in ipairs(Workspace:GetDescendants()) do
-                                    if remote:IsA("RemoteEvent") and (remote.Name:lower():find("shoot") or remote.Name:lower():find("gun") or remote.Name:lower():find("fire") or remote.Name:lower():find("knife")) then
+                                    if remote:IsA("RemoteEvent") and (remote.Name:lower():find("shoot") or remote.Name:lower():find("gun") or remote.Name:lower():find("fire")) then
                                         pcall(function() remote:FireServer(enemyRoot.Position) end)
                                     end
                                 end
@@ -480,9 +501,9 @@ ShooterUIBtn.MouseButton1Click:Connect(function()
                             
                             task.wait(0.05)
                             myRoot.CFrame = oldPos
-                            StatusLabel.Text = "🎯 تم القضاء على المجرم بنجاح!"
+                            StatusLabel.Text = "🎯 تم القضاء على المجرم!"
                         else
-                            StatusLabel.Text = "⚠️ لازم معاك سلاح الشريف!"
+                            StatusLabel.Text = "⚠️ معاكش سلاح الشريف!"
                         end
                     else
                         StatusLabel.Text = "⚠️ لم يتم العثور على المجرم."
@@ -493,7 +514,7 @@ ShooterUIBtn.MouseButton1Click:Connect(function()
             ScreenGui.YaseenShooterBtn.Visible = true
         end
     else
-        ShooterUIBtn.Text = "🔫 إظهار زر شوتر (قتل المجرم): [مغلق]"
+        ShooterUIBtn.Text = "🔫 زر شوتر (قتل المجرم): [مغلق]"
         StatusLabel.Text = "تم إخفاء زر شوتر."
         if ScreenGui:FindFirstChild("YaseenShooterBtn") then
             ScreenGui.YaseenShooterBtn.Visible = false
@@ -502,12 +523,12 @@ ShooterUIBtn.MouseButton1Click:Connect(function()
 end)
 
 -- ============================================================
--- 7. تيليبورت سريع للمسدس
+-- 7. أخذ المسدس فوراً
 -- ============================================================
 GunTPBtn.MouseButton1Click:Connect(function()
     pcall(function()
         local myRoot = LP.Character and LP.Character:FindFirstChild("HumanoidRootPart")
-        if not myRoot or not isValidPosition(myRoot.Position) then return end
+        if not myRoot then return end
         
         local oldPos = myRoot.CFrame
         local gunDrop = nil
@@ -518,13 +539,13 @@ GunTPBtn.MouseButton1Click:Connect(function()
             end
         end
         
-        if gunDrop and isValidPosition(gunDrop.Position) then
+        if gunDrop then
             myRoot.CFrame = gunDrop.CFrame + Vector3.new(0, 1, 0)
             task.wait(0.15)
             myRoot.CFrame = oldPos
-            StatusLabel.Text = "🔫 تم أخذ المسدس والرجوع فوراً!"
+            StatusLabel.Text = "🔫 تم أخذ المسدس بنجاح!"
         else
-            StatusLabel.Text = "⚠️ المسدس غير موجود على الأرض."
+            StatusLabel.Text = "⚠️ المسدس مش موجود على الأرض."
         end
     end)
 end)
@@ -535,7 +556,7 @@ end)
 ResetBtn.MouseButton1Click:Connect(function()
     pcall(function()
         smoothCoinsActive = false
-        SmoothCoinsBtn.Text = "💰 جمع الفلوس الآمن: [مغلق]"
+        SmoothCoinsBtn.Text = "💰 جمع العملات (جري + اختراق حوائط): [مغلق]"
         if LP.Character and LP.Character:FindFirstChildOfClass("Humanoid") then
             LP.Character:FindFirstChildOfClass("Humanoid").Health = 0
             StatusLabel.Text = "🔄 تم عمل ريسبون بنجاح!"
@@ -544,25 +565,27 @@ ResetBtn.MouseButton1Click:Connect(function()
 end)
 
 -- ============================================================
--- 9. القمر الأحمر العالي بالسماء
+-- 9. القمر الأحمر العالي بالسماء + نجوم براقة لامعة جداً
 -- ============================================================
 local redSkyActive = false
 local redBall = nil
+local starsFolder = nil
 
 SkyBtn.MouseButton1Click:Connect(function()
     redSkyActive = not redSkyActive
     pcall(function()
         if redSkyActive then
             Lighting.ClockTime = 0
-            Lighting.Brightness = 0.8
-            Lighting.Ambient = Color3.fromRGB(70, 10, 10)
-            Lighting.OutdoorAmbient = Color3.fromRGB(50, 0, 0)
+            Lighting.Brightness = 1.2
+            Lighting.Ambient = Color3.fromRGB(100, 10, 10)
+            Lighting.OutdoorAmbient = Color3.fromRGB(80, 0, 0)
             
+            -- القمر الأحمر الساطع في قمة السماء فوق خالص
             redBall = Instance.new("Part", Workspace)
             redBall.Name = "YaseenRedMoon"
             redBall.Shape = Enum.PartType.Ball
-            redBall.Size = Vector3.new(600, 600, 600)
-            redBall.Position = Vector3.new(0, 3000, 0)
+            redBall.Size = Vector3.new(420, 420, 420)
+            redBall.Position = Vector3.new(0, 5000, 0)
             redBall.Anchored = true
             redBall.CanCollide = false
             redBall.Material = Enum.Material.Neon
@@ -570,12 +593,35 @@ SkyBtn.MouseButton1Click:Connect(function()
             
             local light = Instance.new("PointLight", redBall)
             light.Color = Color3.fromRGB(255, 0, 0)
-            light.Range = 5000
-            light.Brightness = 15
+            light.Range = 9000
+            light.Brightness = 25
             
-            StatusLabel.Text = "🔴 تم تفعيل القمر الأحمر في أعلى السماء!"
+            -- إنشاء نجوم لامعة براقة في السماء
+            starsFolder = Instance.new("Folder", Workspace)
+            starsFolder.Name = "YaseenBrightStars"
+            math.randomseed(tick())
+            for i = 1, 60 do
+                local star = Instance.new("Part", starsFolder)
+                star.Size = Vector3.new(15, 15, 15)
+                star.Shape = Enum.PartType.Ball
+                star.Material = Enum.Material.Neon
+                star.Color = Color3.fromRGB(255, 255, 255)
+                star.Anchored = true
+                star.CanCollide = false
+                local rx = math.random(-2500, 2500)
+                local rz = math.random(-2500, 2500)
+                star.Position = Vector3.new(rx, 4500, rz)
+                
+                local sLight = Instance.new("PointLight", star)
+                sLight.Color = Color3.fromRGB(200, 230, 255)
+                sLight.Range = 400
+                sLight.Brightness = 5
+            end
+            
+            StatusLabel.Text = "🔴 تم تفعيل القمر الأحمر والنجوم اللامعة في قمة السماء!"
         else
             if redBall then redBall:Destroy(); redBall = nil end
+            if starsFolder then starsFolder:Destroy(); starsFolder = nil end
             Lighting.ClockTime = 14
             Lighting.Brightness = 2
             Lighting.Ambient = Color3.fromRGB(128, 128, 128)
