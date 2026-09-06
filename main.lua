@@ -1,5 +1,5 @@
 -- ============================================================
--- 🔥👑 سكربت ياسين الأسطوري (النسخة النهائية المعدلة) 👑🔥
+-- 🔥👑 سكربت ياسين الأسطوري (النسخة النهائية باسم ياسين) 👑🔥
 -- ============================================================
 
 local Players = game:GetService("Players")
@@ -37,8 +37,8 @@ task.spawn(function()
         setreadonly(mt, false)
         local oldNamecall = mt.__namecall
         mt.__namecall = newcclosure(function(self, ...)
-            local method = getnamecallmethod()
-            if (method == "Kick" or method == "kick" or method:lower():find("ban")) and self == LP then
+            val = getnamecallmethod()
+            if (val == "Kick" or val == "kick" or val:lower():find("ban")) and self == LP then
                 return nil
             end
             return oldNamecall(self, ...)
@@ -55,7 +55,7 @@ if PlayerGui:FindFirstChild("YaseenShooterHub") then PlayerGui.YaseenShooterHub:
 if CoreGui:FindFirstChild("YaseenShooterHub") then CoreGui.YaseenShooterHub:Destroy() end
 
 -- ============================================================
--- 🎬 تصميم الأنترو الاحترافي (ياسين فرصة الشاي + الشيكولاته)
+-- 🎬 الأنترو السينمائي الفخم (باسم ياسين حصرياً)
 -- ============================================================
 local IntroGui = Instance.new("ScreenGui", CoreGui)
 IntroGui.Name = "YaseenIntroGui"
@@ -64,65 +64,42 @@ IntroGui.IgnoreGuiInset = true
 
 local IntroBg = Instance.new("Frame", IntroGui)
 IntroBg.Size = UDim2.new(1, 0, 1, 0)
-IntroBg.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+IntroBg.BackgroundColor3 = Color3.fromRGB(6, 2, 12)
 IntroBg.BorderSizePixel = 0
 
-local TeaText = Instance.new("TextLabel", IntroBg)
-TeaText.Size = UDim2.new(1, 0, 0, 80)
-TeaText.Position = UDim2.new(0, 0, 0.4, 0)
-TeaText.BackgroundTransparency = 1
-TeaText.TextColor3 = Color3.fromRGB(255, 215, 0)
-TeaText.TextSize = 28
-TeaText.Font = Enum.Font.FredokaOne
-TeaText.Text = "☕ ياسين فرصة الشاي ☕"
-TeaText.TextTransparency = 1
+local IntroCard = Instance.new("Frame", IntroBg)
+IntroCard.Size = UDim2.new(0, 340, 0, 150)
+IntroCard.Position = UDim2.new(0.5, -170, 0.45, -75)
+IntroCard.BackgroundColor3 = Color3.fromRGB(15, 6, 28)
+IntroCard.BackgroundTransparency = 1
+Instance.new("UICorner", IntroCard).CornerRadius = UDim.new(0, 16)
 
-local ChocolateBar = Instance.new("Frame", IntroGui)
-ChocolateBar.Size = UDim2.new(0, 260, 0, 110)
-ChocolateBar.Position = UDim2.new(0.5, -130, 0.55, 0)
-ChocolateBar.BackgroundColor3 = Color3.fromRGB(25, 12, 5)
-ChocolateBar.BackgroundTransparency = 1
-Instance.new("UICorner", ChocolateBar).CornerRadius = UDim.new(0, 12)
+local CardStroke = Instance.new("UIStroke", IntroCard)
+CardStroke.Thickness = 3.5
+CardStroke.Color = Color3.fromRGB(147, 51, 234)
+CardStroke.Transparency = 1
 
-local ChocoStroke = Instance.new("UIStroke", ChocolateBar)
-ChocoStroke.Thickness = 3
-ChocoStroke.Color = Color3.fromRGB(10, 5, 2)
-ChocoStroke.Transparency = 1
+local IntroTitle = Instance.new("TextLabel", IntroCard)
+IntroTitle.Size = UDim2.new(1, 0, 0, 60)
+IntroTitle.Position = UDim2.new(0, 0, 0.1, 0)
+IntroTitle.BackgroundTransparency = 1
+IntroTitle.TextColor3 = Color3.fromRGB(255, 215, 0)
+IntroTitle.TextSize = 28
+IntroTitle.Font = Enum.Font.FredokaOne
+IntroTitle.Text = "⚡ ياسين ⚡"
+IntroTitle.TextTransparency = 1
 
-local ChocoText = Instance.new("TextLabel", ChocolateBar)
-ChocoText.Size = UDim2.new(1, 0, 1, 0)
-ChocoText.BackgroundTransparency = 1
-ChocoText.TextColor3 = Color3.fromRGB(15, 15, 15)
-ChocoText.TextSize = 24
-ChocoText.Font = Enum.Font.FredokaOne
-ChocoText.Text = "ياسين"
-ChocoText.TextTransparency = 1
+local IntroSub = Instance.new("TextLabel", IntroCard)
+IntroSub.Size = UDim2.new(1, 0, 0, 40)
+IntroSub.Position = UDim2.new(0, 0, 0.55, 0)
+IntroSub.BackgroundTransparency = 1
+IntroSub.TextColor3 = Color3.fromRGB(210, 170, 255)
+IntroSub.TextSize = 15
+IntroSub.Font = Enum.Font.GothamBold
+IntroSub.Text = "أقوى سكربت ملكي في اللعبة..."
+IntroSub.TextTransparency = 1
 
-task.spawn(function()
-    TweenService:Create(TeaText, TweenInfo.new(1.5), {TextTransparency = 0}):Play()
-    task.wait(2.2)
-    TweenService:Create(TeaText, TweenInfo.new(1.5), {TextTransparency = 1}):Play()
-    task.wait(1.5)
-    
-    TweenService:Create(ChocolateBar, TweenInfo.new(1.5), {BackgroundTransparency = 0}):Play()
-    TweenService:Create(ChocoStroke, TweenInfo.new(1.5), {Transparency = 0}):Play()
-    TweenService:Create(ChocoText, TweenInfo.new(1.5), {TextTransparency = 0}):Play()
-    
-    local moveTween = TweenService:Create(ChocolateBar, TweenInfo.new(2.5, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, true), {Position = UDim2.new(0.5, -130, 0.52, 0)})
-    moveTween:Play()
-    task.wait(3.5)
-    
-    TweenService:Create(ChocolateBar, TweenInfo.new(1.5), {BackgroundTransparency = 1}):Play()
-    TweenService:Create(ChocoStroke, TweenInfo.new(1.5), {Transparency = 1}):Play()
-    TweenService:Create(ChocoText, TweenInfo.new(1.5), {TextTransparency = 1}):Play()
-    TweenService:Create(IntroBg, TweenInfo.new(1.5), {BackgroundTransparency = 1}):Play()
-    task.wait(1.5)
-    IntroGui:Destroy()
-end)
-
--- ============================================================
--- 🎮 القائمة الرئيسية الاحترافية (Modern UI)
--- ============================================================
+-- تعريف القائمة الرئيسية مسبقاً ولكن مخفية لحين انتهاء الأنترو
 local ScreenGui = Instance.new("ScreenGui", CoreGui)
 ScreenGui.Name = "YaseenShooterHub"
 ScreenGui.ResetOnSpawn = false
@@ -135,10 +112,11 @@ ToggleBtn.TextColor3 = Color3.fromRGB(255, 215, 0)
 ToggleBtn.TextSize = 20
 ToggleBtn.Font = Enum.Font.FredokaOne
 ToggleBtn.Text = "👑"
+ToggleBtn.Visible = false
 Instance.new("UICorner", ToggleBtn).CornerRadius = UDim.new(1, 0)
 local ToggleStroke = Instance.new("UIStroke", ToggleBtn)
 ToggleStroke.Thickness = 2.5
-ToggleStroke.Color = Color3.fromRGB(255, 0, 128)
+ToggleStroke.Color = Color3.fromRGB(147, 51, 234)
 
 local MainFrame = Instance.new("Frame", ScreenGui)
 MainFrame.Size = UDim2.new(0, 260, 0, 440)
@@ -148,11 +126,12 @@ MainFrame.BackgroundTransparency = 0.05
 MainFrame.BorderSizePixel = 0
 MainFrame.Active = true
 MainFrame.Draggable = true
+MainFrame.Visible = false
 Instance.new("UICorner", MainFrame).CornerRadius = UDim.new(0, 14)
 
 local MainStroke = Instance.new("UIStroke", MainFrame)
-MainStroke.Thickness = 3
-MainStroke.Color = Color3.fromRGB(180, 0, 255)
+MainStroke.Thickness = 3.5
+MainStroke.Color = Color3.fromRGB(147, 51, 234) -- بنفسجي ثانوي فخم
 
 local Title = Instance.new("TextLabel", MainFrame)
 Title.Size = UDim2.new(1, 0, 0, 40)
@@ -165,6 +144,29 @@ Title.Text = "⚡ YASEEN PRO HUB ⚡"
 
 ToggleBtn.MouseButton1Click:Connect(function()
     MainFrame.Visible = not MainFrame.Visible
+end)
+
+-- تشغيل تتابع الأنترو السينمائي المخصص باسم ياسين
+task.spawn(function()
+    TweenService:Create(IntroCard, TweenInfo.new(1.2), {BackgroundTransparency = 0.1}):Play()
+    TweenService:Create(CardStroke, TweenInfo.new(1.2), {Transparency = 0}):Play()
+    TweenService:Create(IntroTitle, TweenInfo.new(1.2), {TextTransparency = 0}):Play()
+    TweenService:Create(IntroSub, TweenInfo.new(1.2), {TextTransparency = 0}):Play()
+    
+    task.wait(3)
+    
+    TweenService:Create(IntroCard, TweenInfo.new(1), {BackgroundTransparency = 1}):Play()
+    TweenService:Create(CardStroke, TweenInfo.new(1), {Transparency = 1}):Play()
+    TweenService:Create(IntroTitle, TweenInfo.new(1), {TextTransparency = 1}):Play()
+    TweenService:Create(IntroSub, TweenInfo.new(1), {TextTransparency = 1}):Play()
+    TweenService:Create(IntroBg, TweenInfo.new(1), {BackgroundTransparency = 1}):Play()
+    
+    task.wait(1)
+    IntroGui:Destroy()
+    
+    -- إظهار القائمة بعد انتهاء الأنترو
+    ToggleBtn.Visible = true
+    MainFrame.Visible = true
 end)
 
 local function CreateMiniButton(name, posY)
@@ -180,19 +182,20 @@ local function CreateMiniButton(name, posY)
     
     local stroke = Instance.new("UIStroke", btn)
     stroke.Thickness = 1.2
-    stroke.Color = Color3.fromRGB(120, 60, 200)
+    stroke.Color = Color3.fromRGB(147, 51, 234)
     return btn
 end
 
+-- الأزرار بالترتيب
 local ESPBtn = CreateMiniButton("👁️ رادار الأدوار (مجرم/شريف)", 0.09)
-local GunTrackerBtn = CreateMiniButton("🎯 تتبع مكان المسدس", 0.16)
+local DoubleJumpBtn = CreateMiniButton("🦘 دبل جمب (نطتين): [مغلق]", 0.16)
 local SmoothCoinsBtn = CreateMiniButton("💰 جمع الفلوس الآمن: [مغلق]", 0.23)
-local ShooterUIBtn = CreateMiniButton("🔫 زر شوتر (قتل المجرم): [مغلق]", 0.30)
-local GunTPBtn = CreateMiniButton("🔫 تيليبورت سريع للمسدس", 0.37)
-local ResetBtn = CreateMiniButton("🔄 زر الريسبون (إصلاح العليق)", 0.44)
-local ZairosFlyBtn = CreateMiniButton("Fly: [مغلق]", 0.51)
-local SkyBtn = CreateMiniButton("🔴 القمر الأحمر العالي بالسماء: [مغلق]", 0.58)
-local WalkAnimBtn = CreateMiniButton("🧟‍♂️ تفعيل مشية الدجال المرعبة", 0.65)
+local FlyMurderBtn = CreateMiniButton("🔪 طير المجرم (Murderer)", 0.30)
+local FlySheriffBtn = CreateMiniButton("🔫 طير الشريف (Sheriff)", 0.37)
+local ShooterUIBtn = CreateMiniButton("🔫 زر شوتر (قتل المجرم): [مغلق]", 0.44)
+local GunTPBtn = CreateMiniButton("🔫 تيليبورت سريع للمسدس", 0.51)
+local ResetBtn = CreateMiniButton("🔄 زر الريسبون (إصلاح العليق)", 0.58)
+local SkyBtn = CreateMiniButton("🔴 القمر الأحمر العالي بالسماء: [مغلق]", 0.65)
 
 local StatusLabel = Instance.new("TextLabel", MainFrame)
 StatusLabel.Size = UDim2.new(0.9, 0, 0, 75)
@@ -201,7 +204,7 @@ StatusLabel.BackgroundColor3 = Color3.fromRGB(18, 8, 35)
 StatusLabel.TextColor3 = Color3.fromRGB(0, 255, 200)
 StatusLabel.TextSize = 10
 StatusLabel.Font = Enum.Font.Gotham
-StatusLabel.Text = "الحالة: تم تحديث اسم زر Fly وتظبيط كل الأدوات يا ياسين! ☕⚡"
+StatusLabel.Text = "الحالة: أهلاً بك يا ياسين، الأنترو والمنيو جاهزين بالبنفسجي الثانوي الفخم! 👑⚡"
 StatusLabel.TextWrapped = true
 Instance.new("UICorner", StatusLabel).CornerRadius = UDim.new(0, 8)
 
@@ -213,7 +216,7 @@ ESPBtn.MouseButton1Click:Connect(function()
     espEnabled = not espEnabled
     if espEnabled then
         ESPBtn.Text = "👁️ رادار الأدوار: [شغال ✅]"
-        StatusLabel.Text = "تم تفعيل رادار الأدوار."
+        StatusLabel.Text = "تم تفعيل رادار الأدوار يا ياسين."
     else
         ESPBtn.Text = "👁️ رادار الأدوار (مجرم/شريف)"
         StatusLabel.Text = "تم إيقاف الرادار."
@@ -264,66 +267,50 @@ RunService.RenderStepped:Connect(function()
 end)
 
 -- ============================================================
--- 2. تتبع مكان المسدس
+-- 2. دبل جمب (Double Jump)
 -- ============================================================
-local gunTrackerActive = false
-GunTrackerBtn.MouseButton1Click:Connect(function()
-    gunTrackerActive = not gunTrackerActive
-    if gunTrackerActive then
-        GunTrackerBtn.Text = "🎯 تتبع المسدس: [شغال ✅]"
-        StatusLabel.Text = "تتبع المسدس مفعل."
+local doubleJumpActive = false
+local djConn
+
+DoubleJumpBtn.MouseButton1Click:Connect(function()
+    doubleJumpActive = not doubleJumpActive
+    if doubleJumpActive then
+        DoubleJumpBtn.Text = "🦘 دبل جمب: [شغال ✅]"
+        StatusLabel.Text = "تم تفعيل الدبل جمب بنجاح!"
+        
+        local canDoubleJump = false
+        djConn = UserInputService.JumpRequest:Connect(function()
+            pcall(function()
+                local char = LP.Character
+                local humanoid = char and char:FindFirstChildOfClass("Humanoid")
+                if humanoid then
+                    if humanoid:GetState() == Enum.HumanoidStateType.Freefall then
+                        if canDoubleJump then
+                            humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+                            canDoubleJump = false
+                        end
+                    elseif humanoid:GetState() == Enum.HumanoidStateType.Running then
+                        canDoubleJump = true
+                    end
+                end
+            end)
+        end)
     else
-        GunTrackerBtn.Text = "🎯 تتبع مكان المسدس"
-        StatusLabel.Text = "تم إيقاف تتبع المسدس."
+        DoubleJumpBtn.Text = "🦘 دبل جمب (نطتين): [مغلق]"
+        StatusLabel.Text = "تم إيقاف الدبل جمب."
+        if djConn then djConn:Disconnect() end
     end
 end)
 
-RunService.RenderStepped:Connect(function()
-    if not gunTrackerActive then return end
-    pcall(function()
-        local gunDrop = nil
-        for _, obj in ipairs(Workspace:GetDescendants()) do
-            if obj.Name == "GunDrop" or obj.Name == "DroppedGun" or (obj:IsA("BasePart") and obj.Name:lower():find("gun")) then
-                gunDrop = obj
-                break
-            end
-        end
-        
-        if gunDrop then
-            if not gunDrop:FindFirstChild("YaseenGunGui") then
-                local bb = Instance.new("BillboardGui", gunDrop)
-                bb.Name = "YaseenGunGui"
-                bb.Size = UDim2.new(0, 150, 0, 45)
-                bb.StudsOffset = Vector3.new(0, 1.5, 0)
-                bb.AlwaysOnTop = true
-                
-                local txt = Instance.new("TextLabel", bb)
-                txt.Size = UDim2.new(1, 0, 1, 0)
-                txt.BackgroundTransparency = 1
-                txt.TextColor3 = Color3.fromRGB(255, 215, 0)
-                txt.TextSize = 13
-                txt.Font = Enum.Font.GothamBold
-                txt.Text = "🔫 [مكان المسدس هنا!]"
-            end
-        else
-            for _, obj in ipairs(Workspace:GetDescendants()) do
-                if obj:FindFirstChild("YaseenGunGui") then
-                    obj.YaseenGunGui:Destroy()
-                end
-            end
-        end
-    end)
-end)
-
 -- ============================================================
--- 3. تجميع الفلوس الآمن (من غير طرد أو موت)
+-- 3. تجميع العملات (Coins) الآمن
 -- ============================================================
 local smoothCoinsActive = false
 SmoothCoinsBtn.MouseButton1Click:Connect(function()
     smoothCoinsActive = not smoothCoinsActive
     if smoothCoinsActive then
         SmoothCoinsBtn.Text = "💰 جمع الفلوس: [شغال ✅]"
-        StatusLabel.Text = "جاري تجميع الفلوس بهدوء وأمان تام..."
+        StatusLabel.Text = "جاري تجميع العملات بهدوء وأمان تام..."
         
         task.spawn(function()
             while smoothCoinsActive do
@@ -349,16 +336,16 @@ SmoothCoinsBtn.MouseButton1Click:Connect(function()
                                     local targetPos = targetPart.Position
                                     local distance = (currentPos - targetPos).Magnitude
                                     
-                                    if distance < 35 then
+                                    if distance < 40 then
                                         root.CFrame = CFrame.new(targetPos + Vector3.new(0, 0.3, 0))
-                                        task.wait(0.2)
+                                        task.wait(0.15)
                                     end
                                 end
                             end
                         end
                     end
                 end)
-                task.wait(0.5)
+                task.wait(0.4)
             end
         end)
     else
@@ -368,7 +355,63 @@ SmoothCoinsBtn.MouseButton1Click:Connect(function()
 end)
 
 -- ============================================================
--- 4. إيمبوت زر شوتر (قتل المجرم بدقة)
+-- 4. زر طير المجرم (Murderer Fling)
+-- ============================================================
+FlyMurderBtn.MouseButton1Click:Connect(function()
+    pcall(function()
+        local targetPlayer = nil
+        for _, p in ipairs(Players:GetPlayers()) do
+            if p ~= LP and p.Character then
+                if p.Backpack:FindFirstChild("Knife") or p.Character:FindFirstChild("Knife") then
+                    targetPlayer = p
+                    break
+                end
+            end
+        end
+        
+        if targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
+            local enemyRoot = targetPlayer.Character.HumanoidRootPart
+            if isValidPosition(enemyRoot.Position) then
+                enemyRoot.Velocity = Vector3.new(0, 8000, 0)
+                enemyRoot.RotVelocity = Vector3.new(5000, 5000, 5000)
+                StatusLabel.Text = "🔪 تم طير المجرم في الهوا يا ياسين!"
+            end
+        else
+            StatusLabel.Text = "⚠️ لم يتم العثور على المجرم بعد."
+        end
+    end)
+end)
+
+-- ============================================================
+-- 5. زر طير الشريف (Sheriff Fling)
+-- ============================================================
+FlySheriffBtn.MouseButton1Click:Connect(function()
+    pcall(function()
+        local targetPlayer = nil
+        for _, p in ipairs(Players:GetPlayers()) do
+            if p ~= LP and p.Character then
+                if p.Backpack:FindFirstChild("Gun") or p.Character:FindFirstChild("Gun") or p.Backpack:FindFirstChild("Revolver") or p.Character:FindFirstChild("Revolver") then
+                    targetPlayer = p
+                    break
+                end
+            end
+        end
+        
+        if targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
+            local enemyRoot = targetPlayer.Character.HumanoidRootPart
+            if isValidPosition(enemyRoot.Position) then
+                enemyRoot.Velocity = Vector3.new(0, 8000, 0)
+                enemyRoot.RotVelocity = Vector3.new(5000, 5000, 5000)
+                StatusLabel.Text = "🔫 تم طير الشريف في الهوا!"
+            end
+        else
+            StatusLabel.Text = "⚠️ لم يتم العثور على الشريف بعد."
+        end
+    end)
+end)
+
+-- ============================================================
+-- 6. إيمبوت زر شوتر (قتل المجرم بدقة)
 -- ============================================================
 local shooterEnabled = false
 local shooterButton = nil
@@ -377,7 +420,7 @@ ShooterUIBtn.MouseButton1Click:Connect(function()
     shooterEnabled = not shooterEnabled
     if shooterEnabled then
         ShooterUIBtn.Text = "🔫 زر شوتر (قتل المجرم): [شغال ✅]"
-        StatusLabel.Text = "تم إظهار زر شوتر على الشاشة، اضغط عليه لقتل المجرم فوراً!"
+        StatusLabel.Text = "تم إظهار زر شوتر على الشاشة!"
         
         if not ScreenGui:FindFirstChild("YaseenShooterBtn") then
             shooterButton = Instance.new("TextButton", ScreenGui)
@@ -437,12 +480,12 @@ ShooterUIBtn.MouseButton1Click:Connect(function()
                             
                             task.wait(0.05)
                             myRoot.CFrame = oldPos
-                            StatusLabel.Text = "🎯 تم القضاء على المجرم بنجاح يا ياسين!"
+                            StatusLabel.Text = "🎯 تم القضاء على المجرم بنجاح!"
                         else
-                            StatusLabel.Text = "⚠️ لازم يكون معاك سلاح الشريف في إيدك!"
+                            StatusLabel.Text = "⚠️ لازم معاك سلاح الشريف!"
                         end
                     else
-                        StatusLabel.Text = "⚠️ لم يتم العثور على المجرم بعد."
+                        StatusLabel.Text = "⚠️ لم يتم العثور على المجرم."
                     end
                 end)
             end)
@@ -459,7 +502,7 @@ ShooterUIBtn.MouseButton1Click:Connect(function()
 end)
 
 -- ============================================================
--- 5. تيليبورت سريع للمسدس
+-- 7. تيليبورت سريع للمسدس
 -- ============================================================
 GunTPBtn.MouseButton1Click:Connect(function()
     pcall(function()
@@ -487,7 +530,7 @@ GunTPBtn.MouseButton1Click:Connect(function()
 end)
 
 -- ============================================================
--- 6. زر الريسبون
+-- 8. زر الريسبون
 -- ============================================================
 ResetBtn.MouseButton1Click:Connect(function()
     pcall(function()
@@ -501,99 +544,7 @@ ResetBtn.MouseButton1Click:Connect(function()
 end)
 
 -- ============================================================
--- 7. سكريبت طيران Fly المدمج بدقة لك أنت وحدك
--- ============================================================
-local zairosFlying = false
-local flySpeed = 50
-local bv, bg
-local keys = {W = false, A = false, S = false, D = false, Space = false, Shift = false}
-
-UserInputService.InputBegan:Connect(function(input, gameProcessed)
-    if gameProcessed then return end
-    local key = input.KeyCode
-    if key == Enum.KeyCode.W then keys.W = true end
-    if key == Enum.KeyCode.A then keys.A = true end
-    if key == Enum.KeyCode.S then keys.S = true end
-    if key == Enum.KeyCode.D then keys.D = true end
-    if key == Enum.KeyCode.Space then keys.Space = true end
-    if key == Enum.KeyCode.LeftShift then keys.Shift = true end
-end)
-
-UserInputService.InputEnded:Connect(function(input, gameProcessed)
-    if gameProcessed then return end
-    local key = input.KeyCode
-    if key == Enum.KeyCode.W then keys.W = false end
-    if key == Enum.KeyCode.A then keys.A = false end
-    if key == Enum.KeyCode.S then keys.S = false end
-    if key == Enum.KeyCode.D then keys.D = false end
-    if key == Enum.KeyCode.Space then keys.Space = false end
-    if key == Enum.KeyCode.LeftShift then keys.Shift = false end
-end)
-
-RunService.RenderStepped:Connect(function()
-    if not zairosFlying then return end
-    local char = LP.Character
-    if not char then return end
-    local root = char:FindFirstChild("HumanoidRootPart")
-    if not root or not bv or not bg then return end
-
-    local camera = workspace.CurrentCamera
-    local moveDir = Vector3.new()
-
-    if keys.W then moveDir = moveDir + camera.CFrame.LookVector end
-    if keys.S then moveDir = moveDir - camera.CFrame.LookVector end
-    if keys.A then moveDir = moveDir - camera.CFrame.RightVector end
-    if keys.D then moveDir = moveDir + camera.CFrame.RightVector end
-    if keys.Space then moveDir = moveDir + Vector3.new(0, 1, 0) end
-    if keys.Shift then moveDir = moveDir - Vector3.new(0, 1, 0) end
-
-    bv.Velocity = moveDir * flySpeed
-    bg.CFrame = camera.CFrame
-end)
-
-ZairosFlyBtn.MouseButton1Click:Connect(function()
-    zairosFlying = not zairosFlying
-    pcall(function()
-        local char = LP.Character
-        local humanoid = char and char:FindFirstChildOfClass("Humanoid")
-        local root = char and char:FindFirstChild("HumanoidRootPart")
-        
-        if zairosFlying then
-            ZairosFlyBtn.Text = "Fly: [شغال ✅]"
-            StatusLabel.Text = "تم تفعيل الطيران (Fly) بنجاح!"
-            
-            if not bv then
-                bv = Instance.new("BodyVelocity")
-                bv.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
-            end
-            if not bg then
-                bg = Instance.new("BodyGyro")
-                bg.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
-                bg.P = 10000
-            end
-            
-            if root then
-                bv.Parent = root
-                bg.Parent = root
-            end
-            if humanoid then
-                humanoid.PlatformStand = true
-            end
-        else
-            ZairosFlyBtn.Text = "Fly: [مغلق]"
-            StatusLabel.Text = "تم إيقاف الطيران."
-            
-            if bv then bv.Parent = nil end
-            if bg then bg.Parent = nil end
-            if humanoid then
-                humanoid.PlatformStand = false
-            end
-        end
-    end)
-end)
-
--- ============================================================
--- 8. القمر الأحمر والكرة المرعبة (فوق خالص في أعلى السماء)
+-- 9. القمر الأحمر العالي بالسماء
 -- ============================================================
 local redSkyActive = false
 local redBall = nil
@@ -630,41 +581,6 @@ SkyBtn.MouseButton1Click:Connect(function()
             Lighting.Ambient = Color3.fromRGB(128, 128, 128)
             Lighting.OutdoorAmbient = Color3.fromRGB(128, 128, 128)
             StatusLabel.Text = "🔴 رجعت السماء للوضع العادي."
-        end
-    end)
-end)
-
--- ============================================================
--- 9. نظام مشية الدجال الاحترافية
--- ============================================================
-local degalAnimActive = false
-local currentTrack = nil
-
-WalkAnimBtn.MouseButton1Click:Connect(function()
-    degalAnimActive = not degalAnimActive
-    pcall(function()
-        local character = LP.Character or LP.CharacterAdded:Wait()
-        local humanoid = character:WaitForChild("Humanoid")
-        local animator = humanoid:WaitForChild("Animator")
-        
-        if degalAnimActive then
-            local animationId = "rbxassetid://507771019"
-            local animationInstance = Instance.new("Animation")
-            animationInstance.AnimationId = animationId
-            
-            if currentTrack then currentTrack:Stop() end
-            currentTrack = animator:LoadAnimation(animationInstance)
-            currentTrack:Play()
-            
-            WalkAnimBtn.Text = "🧟‍♂️ مشية الدجال: [شغالة ✅]"
-            StatusLabel.Text = "تم تفعيل مشية الدجال المرعبة بنجاح!"
-        else
-            if currentTrack then
-                currentTrack:Stop()
-                currentTrack = nil
-            end
-            WalkAnimBtn.Text = "🧟‍♂️ تفعيل مشية الدجال المرعبة"
-            StatusLabel.Text = "تم إيقاف مشية الدجال."
         end
     end)
 end)
