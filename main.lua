@@ -1,5 +1,5 @@
 -- ============================================================
--- 🔥👑 سكربت ياسين الأسطوري (النسخة النهائية - هالوين لوبي + ذكاء العملات + قتل السكينة الفوري) 👑🔥
+-- 🔥👑 سكربت ياسين الأسطوري (نسخة المشي المستقيم المخترق للحيطان بأمان) 👑🔥
 -- ============================================================
 
 local Players = game:GetService("Players")
@@ -72,10 +72,10 @@ IntroSub.BackgroundTransparency = 1
 IntroSub.TextColor3 = Color3.fromRGB(200, 150, 255)
 IntroSub.TextSize = 14
 IntroSub.Font = Enum.Font.GothamBold
-IntroSub.Text = "جارِ تحميل السكربت الملكي..."
+IntroSub.Text = "جارِ تحميل السكربت الآمن..."
 IntroSub.TextTransparency = 1
 
--- القائمة الرئيسية (سماوي بنفسجي لامع ونصوص مريحة للعين)
+-- القائمة الرئيسية
 local ScreenGui = Instance.new("ScreenGui", CoreGui)
 ScreenGui.Name = "YaseenShooterHub"
 ScreenGui.ResetOnSpawn = false
@@ -149,7 +149,7 @@ local function CreateMiniButton(name, posY)
     btn.Size = UDim2.new(0.9, 0, 0, 30)
     btn.Position = UDim2.new(0.05, 0, posY, 0)
     btn.BackgroundColor3 = Color3.fromRGB(28, 12, 52)
-    btn.TextColor3 = Color3.fromRGB(210, 245, 255) -- نص هادئ غير متوهج لراحة العين
+    btn.TextColor3 = Color3.fromRGB(210, 245, 255)
     btn.TextSize = 10
     btn.Font = Enum.Font.GothamBold
     btn.Text = name
@@ -161,10 +161,10 @@ local function CreateMiniButton(name, posY)
     return btn
 end
 
--- الأزرار والخيارات بالترتيب المطلوب
+-- الأزرار
 local ESPBtn = CreateMiniButton("👁️ رادار الأدوار والمسدس", 0.09)
 local DoubleJumpBtn = CreateMiniButton("🦘 انفينتي جمب (نطاتي): [مغلق]", 0.16)
-local SmoothCoinsBtn = CreateMiniButton("💰 جمع العملات الذكي (سريع): [مغلق]", 0.23)
+local WalkCoinsBtn = TestWalkCoinsBtn or CreateMiniButton("💰 جمع العملات بالمشي المستقيم: [مغلق]", 0.23)
 local AutoKillKnifeBtn = CreateMiniButton("🔪 قتل تلقائي بـ رمية السكينة: [مغلق]", 0.30)
 local HalloweenLobbyBtn = CreateMiniButton("🎃 زينة هالوين اللوبي: [مغلق]", 0.37)
 local ShooterUIBtn = CreateMiniButton("🔫 زر شوتر (قتل المجرم): [مغلق]", 0.44)
@@ -179,12 +179,12 @@ StatusLabel.BackgroundColor3 = Color3.fromRGB(15, 6, 30)
 StatusLabel.TextColor3 = Color3.fromRGB(0, 255, 200)
 StatusLabel.TextSize = 9
 StatusLabel.Font = Enum.Font.Gotham
-StatusLabel.Text = "الحالة: جاهز يا ياسين! استمتع بالهالوين والسرعة الذكية. 👑⚡"
+StatusLabel.Text = "الحالة: جاهز يا ياسين! جمع العملات بالمشي المستقيم المخترق للحيطان مفعل. 👑⚡"
 StatusLabel.TextWrapped = true
 Instance.new("UICorner", StatusLabel).CornerRadius = UDim.new(0, 6)
 
 -- ============================================================
--- 1. رادار الأدوار + مكان المسدس إذا مات الشريف
+-- 1. رادار الأدوار
 -- ============================================================
 local espEnabled = false
 ESPBtn.MouseButton1Click:Connect(function()
@@ -262,7 +262,7 @@ RunService.RenderStepped:Connect(function()
 end)
 
 -- ============================================================
--- 2. انفينتي جمب (Infinity Jump)
+-- 2. انفينتي جمب
 -- ============================================================
 local infinityJumpActive = false
 local ijConn
@@ -290,77 +290,89 @@ DoubleJumpBtn.MouseButton1Click:Connect(function()
 end)
 
 -- ============================================================
--- 3. تجميع العملات الذكي (اختراق حوائط + خط مستقيم + أخذ المجموعات دفعة واحدة)
+-- 3. جمع العملات بالمشي المستقيم المخترق للحيطان (آمن وبدون تيليبرت)
 -- ============================================================
-local smoothCoinsActive = false
-local noclipConn
+local walkCoinsActive = false
 
-SmoothCoinsBtn.MouseButton1Click:Connect(function()
-    smoothCoinsActive = not smoothCoinsActive
-    if smoothCoinsActive then
-        SmoothCoinsBtn.Text = "💰 جمع العملات الذكي: [شغال ✅]"
-        StatusLabel.Text = "جاري تجميع العملات بذكاء وسرعة فائقة..."
-        
-        noclipConn = RunService.Stepped:Connect(function()
-            pcall(function()
-                local char = LP.Character
-                if char then
-                    for _, part in ipairs(char:GetDescendants()) do
-                        if part:IsA("BasePart") then part.CanCollide = false end
-                    end
-                end
-            end)
-        end)
+WalkCoinsBtn.MouseButton1Click:Connect(function()
+    walkCoinsActive = not walkCoinsActive
+    if walkCoinsActive then
+        WalkCoinsBtn.Text = "💰 جمع العملات المستقيم: [شغال ✅]"
+        StatusLabel.Text = "جاري المشي المستقيم واختراق الحيطان لجمع كل العملات..."
         
         task.spawn(function()
-            while smoothCoinsActive do
+            while walkCoinsActive do
                 pcall(function()
                     local char = LP.Character
-                    local root = char and char:FindFirstChild("HumanoidRootPart")
                     local humanoid = char and char:FindFirstChildOfClass("Humanoid")
-                    if not root or not humanoid then return end
+                    local root = char and char:FindFirstChild("HumanoidRootPart")
+                    if not humanoid or not root then return end
                     
-                    local oldSpeed = humanoid.WalkSpeed
-                    humanoid.WalkSpeed = 55
+                    -- إلغاء اصطدام الشخصية بالحيطان عشان تمشي في خط مستقيم تام
+                    for _, part in ipairs(char:GetDescendants()) do
+                        if part:IsA("BasePart") then
+                            part.CanCollide = false
+                        end
+                    end
+                    
+                    -- البحث عن أقرب عملة
+                    local targetPart = nil
+                    local shortestDist = math.huge
                     
                     for _, obj in ipairs(Workspace:GetDescendants()) do
-                        if not smoothCoinsActive then break end
+                        if not walkCoinsActive then break end
                         if obj.Name == "CoinContainer" or obj.Name:lower():find("coin") or obj.Name == "CoinVisual" then
                             for _, coin in ipairs(obj:GetChildren()) do
-                                if not smoothCoinsActive then break end
-                                local targetPart = coin
+                                local cPart = coin
                                 if coin:IsA("Model") and coin.PrimaryPart then
-                                    targetPart = coin.PrimaryPart
+                                    cPart = coin.PrimaryPart
                                 elseif coin:IsA("Model") then
-                                    targetPart = coin:FindFirstChildWhichIsA("BasePart")
+                                    cPart = coin:FindFirstChildWhichIsA("BasePart")
                                 end
                                 
-                                if targetPart and targetPart:IsA("BasePart") then
-                                    local dist = (root.Position - targetPart.Position).Magnitude
-                                    if dist < 120 then
-                                        -- انتقال فوري وسلس للعملة والتقدم للي بعدها بدون لف
-                                        root.CFrame = CFrame.new(targetPart.Position + Vector3.new(0, 2, 0))
-                                        task.wait(0.08)
+                                if cPart and cPart:IsA("BasePart") then
+                                    local dist = (root.Position - cPart.Position).Magnitude
+                                    if dist < shortestDist then
+                                        shortestDist = dist
+                                        targetPart = cPart
                                     end
                                 end
                             end
                         end
                     end
-                    humanoid.WalkSpeed = oldSpeed
+                    
+                    -- لو فيه عملة، روح لها في خط مستقيم تام وبسرعة عالية
+                    if targetPart then
+                        humanoid.WalkSpeed = 30 -- سرعة ممتازة ومنتظمة
+                        humanoid:MoveTo(targetPart.Position)
+                        
+                        -- تحديث مباشر للاتجاه عشان يكون مستقيم 100%
+                        local moveDir = (targetPart.Position - root.Position)
+                        if moveDir.Magnitude > 2 then
+                            root.CFrame = CFrame.new(root.Position, Vector3.new(targetPart.Position.X, root.Position.Y, targetPart.Position.Z))
+                        end
+                    else
+                        task.wait(0.5)
+                    end
                 end)
-                task.wait(0.15)
+                task.wait(0.1)
             end
-            if noclipConn then noclipConn:Disconnect() end
         end)
     else
-        SmoothCoinsBtn.Text = "💰 جمع العملات الذكي (سريع): [مغلق]"
-        StatusLabel.Text = "تم إيقاف جمع العملات."
-        if noclipConn then noclipConn:Disconnect() end
+        WalkCoinsBtn.Text = "💰 جمع العملات بالمشي المستقيم: [مغلق]"
+        StatusLabel.Text = "تم إيقاف جمع العملات المستقيم."
         pcall(function()
             local char = LP.Character
+            local humanoid = char and char:FindFirstChildOfClass("Humanoid")
+            if humanoid then 
+                humanoid.WalkSpeed = 16 
+                humanoid:MoveTo(LP.Character.HumanoidRootPart.Position) 
+            end
             if char then
                 for _, part in ipairs(char:GetDescendants()) do
-                    if part:IsA("BasePart") then part.CanCollide = true end
+                    if part:IsA("BasePart") then
+                        part.CanCollide = true
+                    end
                 end
             end
         end)
@@ -368,14 +380,14 @@ SmoothCoinsBtn.MouseButton1Click:Connect(function()
 end)
 
 -- ============================================================
--- 4. خيار قتل تلقائي برمي السكينة في أي اتجاه (Kill Aura Knife)
+-- 4. قتل تلقائي برمي السكينة
 -- ============================================================
 local autoKillKnifeActive = false
 AutoKillKnifeBtn.MouseButton1Click:Connect(function()
     autoKillKnifeActive = not autoKillKnifeActive
     if autoKillKnifeActive then
         AutoKillKnifeBtn.Text = "🔪 قتل تلقائي بالسكينة: [شغال ✅]"
-        StatusLabel.Text = "تفعيل خيار رمي السكينة القاتل جاهز!"
+        StatusLabel.Text = "تفعيل رمي السكينة القاتل فوراً!"
         
         task.spawn(function()
             while autoKillKnifeActive do
@@ -385,7 +397,6 @@ AutoKillKnifeBtn.MouseButton1Click:Connect(function()
                         for _, p in ipairs(Players:GetPlayers()) do
                             if p ~= LP and p.Character and p.Character:FindFirstChild("HumanoidRootPart") then
                                 local enemyRoot = p.Character.HumanoidRootPart
-                                -- إذا تم رصد أي لاعب قريب، تفعيل ريموت رمي السكينة عليه فوراً
                                 for _, remote in ipairs(Workspace:GetDescendants()) do
                                     if remote:IsA("RemoteEvent") and (remote.Name:lower():find("knife") or remote.Name:lower():find("throw") or remote.Name:lower():find("slash")) then
                                         pcall(function()
@@ -407,7 +418,7 @@ AutoKillKnifeBtn.MouseButton1Click:Connect(function()
 end)
 
 -- ============================================================
--- 5. زينة هالوين اللوبي (قرع عسل وأجواء مرعبة في الاستراحة)
+-- 5. زينة هالوين اللوبي
 -- ============================================================
 local halloweenActive = false
 local halloweenFolder = nil
@@ -422,7 +433,6 @@ HalloweenLobbyBtn.MouseButton1Click:Connect(function()
             halloweenFolder = Instance.new("Folder", Workspace)
             halloweenFolder.Name = "YaseenHalloweenLobby"
             
-            -- إضافة يقطين / قرع عسل مضيء ومجسمات هالوين في اللوبي
             math.randomseed(tick())
             for i = 1, 15 do
                 local pumpkin = Instance.new("Part", halloweenFolder)
@@ -430,7 +440,7 @@ HalloweenLobbyBtn.MouseButton1Click:Connect(function()
                 pumpkin.Size = Vector3.new(6, 6, 6)
                 pumpkin.Shape = Enum.PartType.Ball
                 pumpkin.Material = Enum.Material.Neon
-                pumpkin.Color = Color3.fromRGB(255, 100, 0) -- برتقالي هالوين
+                pumpkin.Color = Color3.fromRGB(255, 100, 0)
                 pumpkin.Anchored = true
                 pumpkin.CanCollide = false
                 pumpkin.Position = Vector3.new(math.random(-80, 80), 5, math.random(-80, 80))
@@ -547,7 +557,7 @@ GunTPBtn.MouseButton1Click:Connect(function()
         local oldPos = myRoot.CFrame
         local gunDrop = nil
         for _, obj in ipairs(Workspace:GetDescendants()) do
-            if obj.Name == "GunDrop" or obj.Name == "DroppedGun" or (obj:IsA("BasePart") and obj.Name:lower():find("gun")) then
+            if obj.Name == "GunDrop" or obj.Name == "DroppedGun" or (obj:IsA("BasePart") and obj.Name:lower().find("gun")) then
                 gunDrop = obj
                 break
             end
@@ -569,8 +579,8 @@ end)
 -- ============================================================
 ResetBtn.MouseButton1Click:Connect(function()
     pcall(function()
-        smoothCoinsActive = false
-        SmoothCoinsBtn.Text = "💰 جمع العملات الذكي (سريع): [مغلق]"
+        walkCoinsActive = false
+        WalkCoinsBtn.Text = "💰 جمع العملات بالمشي المستقيم: [مغلق]"
         if LP.Character and LP.Character:FindFirstChildOfClass("Humanoid") then
             LP.Character:FindFirstChildOfClass("Humanoid").Health = 0
             StatusLabel.Text = "🔄 تم عمل ريسبون بنجاح!"
@@ -579,7 +589,7 @@ ResetBtn.MouseButton1Click:Connect(function()
 end)
 
 -- ============================================================
--- 9. القمر الأحمر العالي بالسماء + نجوم براقة لامعة جداً
+-- 9. القمر الأحمر العالي بالسماء + نجوم براقة
 -- ============================================================
 local redSkyActive = false
 local redBall = nil
