@@ -1,5 +1,5 @@
 -- ============================================================
--- 👑🔥 سكربت ياسين الأسطوري المطور (مشية الدجال + قمر أحمر + منيو فخمة) 🔥👑
+-- 🔥👑 سكربت ياسين الأسطوري (النسخة النهائية المضبوطة والمعدلة) 👑🔥
 -- ============================================================
 
 local Players = game:GetService("Players")
@@ -185,12 +185,12 @@ end
 
 local ESPBtn = CreateMiniButton("👁️ رادار الأدوار (مجرم/شريف)", 0.09)
 local GunTrackerBtn = CreateMiniButton("🎯 تتبع مكان المسدس", 0.16)
-local SmoothCoinsBtn = CreateMiniButton("💰 جمع الكوينات بهدوء وذكاء: [مغلق]", 0.23)
-local ShooterUIBtn = CreateMiniButton("🔫 إظهار زر شوتر (قتل المجرم): [مغلق]", 0.30)
+local SmoothCoinsBtn = CreateMiniButton("💰 جمع الكوينات بذكاء: [مغلق]", 0.23)
+local ShooterUIBtn = CreateMiniButton("🔫 زر شوتر (قتل المجرم): [مغلق]", 0.30)
 local GunTPBtn = CreateMiniButton("🔫 تيليبورت سريع للمسدس", 0.37)
 local ResetBtn = CreateMiniButton("🔄 زر الريسبون (إصلاح العليق)", 0.44)
-local TouchFlyBtn = CreateMiniButton("🚀 طيران اللمس: [مغلق]", 0.51)
-local SkyBtn = CreateMiniButton("🔴 القمر الأحمر والكرة المرعبة: [مغلق]", 0.58)
+local TouchFlyBtn = CreateMiniButton("🚀 طيران اللاعبين: [مغلق]", 0.51)
+local SkyBtn = CreateMiniButton("🔴 القمر الأحمر العالي بالسماء: [مغلق]", 0.58)
 local WalkAnimBtn = CreateMiniButton("🧟‍♂️ تفعيل مشية الدجال المرعبة", 0.65)
 
 local StatusLabel = Instance.new("TextLabel", MainFrame)
@@ -200,7 +200,7 @@ StatusLabel.BackgroundColor3 = Color3.fromRGB(18, 8, 35)
 StatusLabel.TextColor3 = Color3.fromRGB(0, 255, 200)
 StatusLabel.TextSize = 10
 StatusLabel.Font = Enum.Font.Gotham
-StatusLabel.Text = "الحالة: المنيو جاهزة يا ياسين.. جرب مشية الدجال الآن! ☕⚡"
+StatusLabel.Text = "الحالة: تم ضبط تجميع الكوينات، ورفع القمر فوق خالص، وتعديل زر طيران اللاعبين! ☕⚡"
 StatusLabel.TextWrapped = true
 Instance.new("UICorner", StatusLabel).CornerRadius = UDim.new(0, 8)
 
@@ -315,28 +315,16 @@ RunService.RenderStepped:Connect(function()
 end)
 
 -- ============================================================
--- 3. جمع الكوينات بذكاء وهدوء (مع فحص isValidPosition لمنع كود 267)
+-- 3. تجميع الكوينات المحدث والفعال (مع تتبع دقيق لأماكن الكوينات)
 -- ============================================================
 local smoothCoinsActive = false
 SmoothCoinsBtn.MouseButton1Click:Connect(function()
     smoothCoinsActive = not smoothCoinsActive
     if smoothCoinsActive then
-        SmoothCoinsBtn.Text = "💰 جمع الكوينات بذكاء: [شغال ✅]"
-        StatusLabel.Text = "جاري تجميع الكوينات ببطء وحذر مع نظام الحماية من الكراش..."
+        SmoothCoinsBtn.Text = "💰 جمع الكوينات: [شغال ✅]"
+        StatusLabel.Text = "جاري تجميع الكوينات بنجاح يا ياسين..."
         
         task.spawn(function()
-            local noclipConn = RunService.Stepped:Connect(function()
-                pcall(function()
-                    if LP.Character then
-                        for _, part in ipairs(LP.Character:GetDescendants()) do
-                            if part:IsA("BasePart") then
-                                part.CanCollide = false
-                            end
-                        end
-                    end
-                end)
-            end)
-            
             while smoothCoinsActive do
                 pcall(function()
                     local char = LP.Character
@@ -345,37 +333,29 @@ SmoothCoinsBtn.MouseButton1Click:Connect(function()
                     
                     for _, obj in ipairs(Workspace:GetDescendants()) do
                         if not smoothCoinsActive then break end
-                        if obj.Name == "CoinContainer" or obj.Name:lower():find("coin") then
+                        if obj.Name == "CoinContainer" or obj.Name:lower():find("coin") or obj.Name == "CoinVisual" then
                             for _, coin in ipairs(obj:GetChildren()) do
                                 if not smoothCoinsActive then break end
-                                if coin:IsA("BasePart") and isValidPosition(coin.Position) and root then
-                                    while coin and coin.Parent and (root.Position - coin.Position).Magnitude > 2 and smoothCoinsActive do
-                                        local charNow = LP.Character
-                                        local rootNow = charNow and charNow:FindFirstChild("HumanoidRootPart")
-                                        if not rootNow or not isValidPosition(rootNow.Position) then break end
-                                        
-                                        local dir = (coin.Position - rootNow.Position).Unit
-                                        if isValidPosition(Vector3.new(dir.X, dir.Y, dir.Z)) then
-                                            rootNow.Velocity = dir * 50
-                                        end
-                                        RunService.Heartbeat:Wait()
-                                    end
-                                    task.wait(0.12)
+                                local targetPart = coin
+                                if coin:IsA("Model") and coin.PrimaryPart then
+                                    targetPart = coin.PrimaryPart
+                                elseif coin:IsA("Model") then
+                                    targetPart = coin:FindFirstChildWhichIsA("BasePart")
+                                end
+                                
+                                if targetPart and targetPart:IsA("BasePart") and isValidPosition(targetPart.Position) then
+                                    root.CFrame = CFrame.new(targetPart.Position + Vector3.new(0, 2, 0))
+                                    task.wait(0.2)
                                 end
                             end
                         end
                     end
                 end)
-                task.wait(0.3)
-            end
-            
-            if noclipConn then noclipConn:Disconnect() end
-            if LP.Character and LP.Character:FindFirstChild("HumanoidRootPart") then
-                LP.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
+                task.wait(0.5)
             end
         end)
     else
-        SmoothCoinsBtn.Text = "💰 جمع الكوينات بهدوء وذكاء: [مغلق]"
+        SmoothCoinsBtn.Text = "💰 جمع الكوينات بذكاء: [مغلق]"
         StatusLabel.Text = "تم إيقاف جمع الكوينات."
     end
 end)
@@ -505,7 +485,7 @@ end)
 ResetBtn.MouseButton1Click:Connect(function()
     pcall(function()
         smoothCoinsActive = false
-        SmoothCoinsBtn.Text = "💰 جمع الكوينات بهدوء وذكاء: [مغلق]"
+        SmoothCoinsBtn.Text = "💰 جمع الكوينات بذكاء: [مغلق]"
         if LP.Character and LP.Character:FindFirstChildOfClass("Humanoid") then
             LP.Character:FindFirstChildOfClass("Humanoid").Health = 0
             StatusLabel.Text = "🔄 تم عمل ريسبون بنجاح!"
@@ -514,41 +494,41 @@ ResetBtn.MouseButton1Click:Connect(function()
 end)
 
 -- ============================================================
--- 7. طيران اللمس
+-- 7. طيران اللاعبين (يطير اللاعبين الآخرين فقط بدون ما يأذيك)
 -- ============================================================
 local touchFlyEnabled = false
 local flingConn = nil
 TouchFlyBtn.MouseButton1Click:Connect(function()
     touchFlyEnabled = not touchFlyEnabled
     if touchFlyEnabled then
-        TouchFlyBtn.Text = "🚀 طيران اللمس: [شغال ✅]"
-        StatusLabel.Text = "اقترب من أي لاعب سيطير فوراً!"
+        TouchFlyBtn.Text = "🚀 طيران اللاعبين: [شغال ✅]"
+        StatusLabel.Text = "اقترب من أي لاعب آخر ليطير في الهواء!"
         pcall(function()
-            local char = LP.Character
-            local root = char and char:FindFirstChild("HumanoidRootPart")
-            if root then
-                flingConn = RunService.Heartbeat:Connect(function()
-                    for _, p in ipairs(Players:GetPlayers()) do
-                        if p ~= LP and p.Character and p.Character:FindFirstChild("HumanoidRootPart") then
-                            local enemyRoot = p.Character.HumanoidRootPart
-                            if (root.Position - enemyRoot.Position).Magnitude < 4 then
-                                enemyRoot.Velocity = Vector3.new(99999, 99999, 99999)
-                                enemyRoot.AssemblyAngularVelocity = Vector3.new(99999, 99999, 99999)
-                            end
+            flingConn = RunService.Heartbeat:Connect(function()
+                local char = LP.Character
+                local root = char and char:FindFirstChild("HumanoidRootPart")
+                if not root then return end
+                
+                for _, p in ipairs(Players:GetPlayers()) do
+                    if p ~= LP and p.Character and p.Character:FindFirstChild("HumanoidRootPart") then
+                        local enemyRoot = p.Character.HumanoidRootPart
+                        if (root.Position - enemyRoot.Position).Magnitude < 4.5 then
+                            enemyRoot.Velocity = Vector3.new(99999, 99999, 99999)
+                            enemyRoot.AssemblyAngularVelocity = Vector3.new(99999, 99999, 99999)
                         end
                     end
-                end)
-            end
+                end
+            end)
         end)
     else
-        TouchFlyBtn.Text = "🚀 طيران اللمس: [مغلق]"
-        StatusLabel.Text = "تم إيقاف طيران اللمس."
+        TouchFlyBtn.Text = "🚀 طيران اللاعبين: [مغلق]"
+        StatusLabel.Text = "تم إيقاف طيران اللاعبين."
         if flingConn then flingConn:Disconnect(); flingConn = nil end
     end
 end)
 
 -- ============================================================
--- 8. القمر الأحمر والكرة الحمراء المرعبة في السماء
+-- 8. القمر الأحمر والكرة المرعبة (مرتفعين فوق خالص في أعلى السماء)
 -- ============================================================
 local redSkyActive = false
 local redBall = nil
@@ -565,8 +545,8 @@ SkyBtn.MouseButton1Click:Connect(function()
             redBall = Instance.new("Part", Workspace)
             redBall.Name = "YaseenRedMoon"
             redBall.Shape = Enum.PartType.Ball
-            redBall.Size = Vector3.new(350, 350, 350)
-            redBall.Position = Vector3.new(0, 700, 0)
+            redBall.Size = Vector3.new(600, 600, 600) -- حجم ضخم جداً
+            redBall.Position = Vector3.new(0, 3000, 0) -- مرفوع فوق خالص في أعلى سماء الماب
             redBall.Anchored = true
             redBall.CanCollide = false
             redBall.Material = Enum.Material.Neon
@@ -574,10 +554,10 @@ SkyBtn.MouseButton1Click:Connect(function()
             
             local light = Instance.new("PointLight", redBall)
             light.Color = Color3.fromRGB(255, 0, 0)
-            light.Range = 1000
-            light.Brightness = 10
+            light.Range = 5000
+            light.Brightness = 15
             
-            StatusLabel.Text = "🔴 تم تفعيل القمر الأحمر والكرة المرعبة في السماء!"
+            StatusLabel.Text = "🔴 تم رفع القمر الأحمر والكرة المرعبة فوق خالص في السماء!"
         else
             if redBall then redBall:Destroy(); redBall = nil end
             Lighting.ClockTime = 14
@@ -603,7 +583,7 @@ WalkAnimBtn.MouseButton1Click:Connect(function()
         local animator = humanoid:WaitForChild("Animator")
         
         if degalAnimActive then
-            local animationId = "rbxassetid://507771019" -- مشية الدجال
+            local animationId = "rbxassetid://507771019"
             local animationInstance = Instance.new("Animation")
             animationInstance.AnimationId = animationId
             
