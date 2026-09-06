@@ -1,5 +1,5 @@
 -- ============================================================
--- 🔥👑 سكربت ياسين الأسطوري (النسخة النهائية المصححة والمضمونة) 👑🔥
+-- 🔥👑 سكربت ياسين الأسطوري (النسخة النهائية المعدلة) 👑🔥
 -- ============================================================
 
 local Players = game:GetService("Players")
@@ -8,6 +8,7 @@ local Lighting = game:GetService("Lighting")
 local RunService = game:GetService("RunService")
 local CoreGui = game:GetService("CoreGui")
 local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
 local LP = Players.LocalPlayer
 
 -- ============================================================
@@ -185,11 +186,11 @@ end
 
 local ESPBtn = CreateMiniButton("👁️ رادار الأدوار (مجرم/شريف)", 0.09)
 local GunTrackerBtn = CreateMiniButton("🎯 تتبع مكان المسدس", 0.16)
-local SmoothCoinsBtn = CreateMiniButton("💰 جمع الكوينات: [مغلق]", 0.23)
+local SmoothCoinsBtn = CreateMiniButton("💰 جمع الفلوس الآمن: [مغلق]", 0.23)
 local ShooterUIBtn = CreateMiniButton("🔫 زر شوتر (قتل المجرم): [مغلق]", 0.30)
 local GunTPBtn = CreateMiniButton("🔫 تيليبورت سريع للمسدس", 0.37)
 local ResetBtn = CreateMiniButton("🔄 زر الريسبون (إصلاح العليق)", 0.44)
-local TouchFlyBtn = CreateMiniButton("🚀 طيران اللاعبين: [مغلق]", 0.51)
+local ZairosFlyBtn = CreateMiniButton("Fly: [مغلق]", 0.51)
 local SkyBtn = CreateMiniButton("🔴 القمر الأحمر العالي بالسماء: [مغلق]", 0.58)
 local WalkAnimBtn = CreateMiniButton("🧟‍♂️ تفعيل مشية الدجال المرعبة", 0.65)
 
@@ -200,7 +201,7 @@ StatusLabel.BackgroundColor3 = Color3.fromRGB(18, 8, 35)
 StatusLabel.TextColor3 = Color3.fromRGB(0, 255, 200)
 StatusLabel.TextSize = 10
 StatusLabel.Font = Enum.Font.Gotham
-StatusLabel.Text = "الحالة: تم إصلاح جمع الكوينات وطيران اللاعبين بالكامل يا ياسين! ☕⚡"
+StatusLabel.Text = "الحالة: تم تحديث اسم زر Fly وتظبيط كل الأدوات يا ياسين! ☕⚡"
 StatusLabel.TextWrapped = true
 Instance.new("UICorner", StatusLabel).CornerRadius = UDim.new(0, 8)
 
@@ -315,14 +316,14 @@ RunService.RenderStepped:Connect(function()
 end)
 
 -- ============================================================
--- 3. تجميع الكوينات الآمن (بدون طيران أو موت)
+-- 3. تجميع الفلوس الآمن (من غير طرد أو موت)
 -- ============================================================
 local smoothCoinsActive = false
 SmoothCoinsBtn.MouseButton1Click:Connect(function()
     smoothCoinsActive = not smoothCoinsActive
     if smoothCoinsActive then
-        SmoothCoinsBtn.Text = "💰 جمع الكوينات: [شغال ✅]"
-        StatusLabel.Text = "جاري تجميع الكوينات بهدوء وأمان تام..."
+        SmoothCoinsBtn.Text = "💰 جمع الفلوس: [شغال ✅]"
+        StatusLabel.Text = "جاري تجميع الفلوس بهدوء وأمان تام..."
         
         task.spawn(function()
             while smoothCoinsActive do
@@ -344,26 +345,25 @@ SmoothCoinsBtn.MouseButton1Click:Connect(function()
                                 end
                                 
                                 if targetPart and targetPart:IsA("BasePart") and isValidPosition(targetPart.Position) then
-                                    -- التحرك بسلاسة وبطء للكوين بدون ما يعلق أو يموت اللاعب
                                     local currentPos = root.Position
                                     local targetPos = targetPart.Position
                                     local distance = (currentPos - targetPos).Magnitude
                                     
-                                    if distance < 40 then
-                                        root.CFrame = CFrame.new(targetPos + Vector3.new(0, 0.5, 0))
-                                        task.wait(0.15)
+                                    if distance < 35 then
+                                        root.CFrame = CFrame.new(targetPos + Vector3.new(0, 0.3, 0))
+                                        task.wait(0.2)
                                     end
                                 end
                             end
                         end
                     end
                 end)
-                task.wait(0.4)
+                task.wait(0.5)
             end
         end)
     else
-        SmoothCoinsBtn.Text = "💰 جمع الكوينات: [مغلق]"
-        StatusLabel.Text = "تم إيقاف جمع الكوينات."
+        SmoothCoinsBtn.Text = "💰 جمع الفلوس الآمن: [مغلق]"
+        StatusLabel.Text = "تم إيقاف جمع الفلوس."
     end
 end)
 
@@ -492,7 +492,7 @@ end)
 ResetBtn.MouseButton1Click:Connect(function()
     pcall(function()
         smoothCoinsActive = false
-        SmoothCoinsBtn.Text = "💰 جمع الكوينات: [مغلق]"
+        SmoothCoinsBtn.Text = "💰 جمع الفلوس الآمن: [مغلق]"
         if LP.Character and LP.Character:FindFirstChildOfClass("Humanoid") then
             LP.Character:FindFirstChildOfClass("Humanoid").Health = 0
             StatusLabel.Text = "🔄 تم عمل ريسبون بنجاح!"
@@ -501,38 +501,95 @@ ResetBtn.MouseButton1Click:Connect(function()
 end)
 
 -- ============================================================
--- 7. طيران اللاعبين الصحيح (يطيرهم هم فقط بدون ما يأثر عليك أنت)
+-- 7. سكريبت طيران Fly المدمج بدقة لك أنت وحدك
 -- ============================================================
-local touchFlyEnabled = false
-local flingConn = nil
-TouchFlyBtn.MouseButton1Click:Connect(function()
-    touchFlyEnabled = not touchFlyEnabled
-    if touchFlyEnabled then
-        TouchFlyBtn.Text = "🚀 طيران اللاعبين: [شغال ✅]"
-        StatusLabel.Text = "اقترب من أي لاعب ليطير في الهواء لوحده!"
-        pcall(function()
-            flingConn = RunService.Heartbeat:Connect(function()
-                local char = LP.Character
-                local root = char and char:FindFirstChild("HumanoidRootPart")
-                if not root then return end
-                
-                for _, p in ipairs(Players:GetPlayers()) do
-                    if p ~= LP and p.Character and p.Character:FindFirstChild("HumanoidRootPart") then
-                        local enemyRoot = p.Character.HumanoidRootPart
-                        -- التأكد من أننا نؤثر على حركة اللاعب الآخر فقط بعيداً عن شخصيتك
-                        if (root.Position - enemyRoot.Position).Magnitude < 4.5 then
-                            enemyRoot.Velocity = Vector3.new(0, 90000, 0)
-                            enemyRoot.AssemblyAngularVelocity = Vector3.new(50000, 50000, 50000)
-                        end
-                    end
-                end
-            end)
-        end)
-    else
-        TouchFlyBtn.Text = "🚀 طيران اللاعبين: [مغلق]"
-        StatusLabel.Text = "تم إيقاف طيران اللاعبين."
-        if flingConn then flingConn:Disconnect(); flingConn = nil end
-    end
+local zairosFlying = false
+local flySpeed = 50
+local bv, bg
+local keys = {W = false, A = false, S = false, D = false, Space = false, Shift = false}
+
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    if gameProcessed then return end
+    local key = input.KeyCode
+    if key == Enum.KeyCode.W then keys.W = true end
+    if key == Enum.KeyCode.A then keys.A = true end
+    if key == Enum.KeyCode.S then keys.S = true end
+    if key == Enum.KeyCode.D then keys.D = true end
+    if key == Enum.KeyCode.Space then keys.Space = true end
+    if key == Enum.KeyCode.LeftShift then keys.Shift = true end
+end)
+
+UserInputService.InputEnded:Connect(function(input, gameProcessed)
+    if gameProcessed then return end
+    local key = input.KeyCode
+    if key == Enum.KeyCode.W then keys.W = false end
+    if key == Enum.KeyCode.A then keys.A = false end
+    if key == Enum.KeyCode.S then keys.S = false end
+    if key == Enum.KeyCode.D then keys.D = false end
+    if key == Enum.KeyCode.Space then keys.Space = false end
+    if key == Enum.KeyCode.LeftShift then keys.Shift = false end
+end)
+
+RunService.RenderStepped:Connect(function()
+    if not zairosFlying then return end
+    local char = LP.Character
+    if not char then return end
+    local root = char:FindFirstChild("HumanoidRootPart")
+    if not root or not bv or not bg then return end
+
+    local camera = workspace.CurrentCamera
+    local moveDir = Vector3.new()
+
+    if keys.W then moveDir = moveDir + camera.CFrame.LookVector end
+    if keys.S then moveDir = moveDir - camera.CFrame.LookVector end
+    if keys.A then moveDir = moveDir - camera.CFrame.RightVector end
+    if keys.D then moveDir = moveDir + camera.CFrame.RightVector end
+    if keys.Space then moveDir = moveDir + Vector3.new(0, 1, 0) end
+    if keys.Shift then moveDir = moveDir - Vector3.new(0, 1, 0) end
+
+    bv.Velocity = moveDir * flySpeed
+    bg.CFrame = camera.CFrame
+end)
+
+ZairosFlyBtn.MouseButton1Click:Connect(function()
+    zairosFlying = not zairosFlying
+    pcall(function()
+        local char = LP.Character
+        local humanoid = char and char:FindFirstChildOfClass("Humanoid")
+        local root = char and char:FindFirstChild("HumanoidRootPart")
+        
+        if zairosFlying then
+            ZairosFlyBtn.Text = "Fly: [شغال ✅]"
+            StatusLabel.Text = "تم تفعيل الطيران (Fly) بنجاح!"
+            
+            if not bv then
+                bv = Instance.new("BodyVelocity")
+                bv.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+            end
+            if not bg then
+                bg = Instance.new("BodyGyro")
+                bg.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
+                bg.P = 10000
+            end
+            
+            if root then
+                bv.Parent = root
+                bg.Parent = root
+            end
+            if humanoid then
+                humanoid.PlatformStand = true
+            end
+        else
+            ZairosFlyBtn.Text = "Fly: [مغلق]"
+            StatusLabel.Text = "تم إيقاف الطيران."
+            
+            if bv then bv.Parent = nil end
+            if bg then bg.Parent = nil end
+            if humanoid then
+                humanoid.PlatformStand = false
+            end
+        end
+    end)
 end)
 
 -- ============================================================
@@ -554,7 +611,7 @@ SkyBtn.MouseButton1Click:Connect(function()
             redBall.Name = "YaseenRedMoon"
             redBall.Shape = Enum.PartType.Ball
             redBall.Size = Vector3.new(600, 600, 600)
-            redBall.Position = Vector3.new(0, 3000, 0) -- مرفوع فوق خالص في أعلى سماء الماب
+            redBall.Position = Vector3.new(0, 3000, 0)
             redBall.Anchored = true
             redBall.CanCollide = false
             redBall.Material = Enum.Material.Neon
